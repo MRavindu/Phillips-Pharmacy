@@ -1,11 +1,105 @@
+/* 
+-------------------------------------------- PHILLIPS PHARMACY CSS GUIDELINES --------------------------------------------
+---------- TYPOGRAPHY ----------
+
+FONT SIZES
+12px / 16px / 20px / 24px / 32px / 40px / 48px / 62px
+
+FONT WEIGHTS
+400 / 700
+
+LINE HEIGHTS
+1.2 / 1.5
+
+LETTER SPACING
+0 / -2px
+
+FONT FAMILY
+Poppins
+
+---------- COLORS ----------
+
+PRIMARY
+Base: #339af0 (Sky Blue)
+Tint: #d0ebff (Arctic)
+Shade: #1c7ed6 (Deep Sea)
+
+SECONDARY
+Base: #9775fa (Lavendar)
+Tint: #e5dbff (Moonligh Iris)
+Shade: #7048e8 (Velvet Night)
+
+TERTIARY
+Base: #ff922b (Pumpkin)
+Tint: #ffe8cc (Dawn)
+Shade: #f76707 (Lava)
+
+GREY
+Base: #495057 (Slate)
+Tint: #f1f3f5 (Pebble)
+Shade: #212529 (Graphite)
+White: #ffffff (White)
+Black: #000000 (Black)
+
+---------- BORDER RADIUS ----------
+
+4px / 8px / 20px
+
+---------- SPACING SYSTEM ----------
+
+5px / 10px / 15px / 20px / 25px / 30px / 40px / 50px / 60px / 70px / 80px / 90px / 100px / 125px / 150px / 200px / 250px / 300px / 400px / 500px
+
+*/
+
+/* -------------------------------------------- GLOBAL CSS STYLES -------------------------------------------- */
 /* 1. CSS Variables - Change colors globally here */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
+    /* COLORS */
+    --primary-base: #339af0;
+    --primary-tint: #d0ebff;
+    --primary-shade: #0082ed;
+    --secondary-base: #9775fa;
+    --secondary-tint: #e5dbff;
+    --secondary-shade: #653ae7;
+    --tertiary-base: #ff922b;
+    --tertiary-tint: #ffe8cc;
+    --tertiary-shade: #fb8211;
+    --grey-base: #495057;
+    --grey-tint: #f3f3f3;
+    --grey-shade: #212529;
+    --white: #ffffff;
+    --black: #000000;
     --success-color: #27ae60;
-    --danger-color: #e74c3c;
-    --bg-color: #f4f7f6;
+    --danger-color: #f93620;
+
+    /* FONT WEIGHT */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* LINE HEIGHTS */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+
+    /* LETTER SPACING */
+    --letter-spacing-tight: -2px;
+
+    /* FONT FAMILY */
+    --font-family: 'Poppins', sans-serif;
+
+    /* MISCELLANEOUS */
+    --nav-height: 100px; /* Update the value in the flexbox topic */
     --sidebar-width: 250px;
+
+    /* FONT SIZE */
+    --text-sm: 1.2rem;
+    --text-base: 1.6rem;
+    --text-paragraph: 2rem;
+    --text-h6: 2.2rem;
+    --text-h5: 2.4rem;
+    --text-h4: 3.2rem;
+    --text-h3: 4rem;
+    --text-h2: 4.8rem;
+    --text-h1: 6.2rem;   
 }
 
 /* 2. Global Reset */
@@ -16,11 +110,74 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: #333;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    background-color: var(--grey-tint);
+    color: var(--grey-base);
+    /* font-size: 62.5%; */
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--grey-shade);
+}
+
+h1 {
+    font-size: var(--text-h1);
+}
+
+h2 {
+    font-size: var(--text-h2);
+}
+
+h3 {
+    font-size: var(--text-h3);
+}
+
+h4 {
+    font-size: var(--text-h4);
+}
+
+h5 {
+    font-size: var(--text-h5);
+}
+
+h6{
+    font-size: var(--text-h6);
+}
+
+p {
+    font-size: var(--text-paragraph);
+}
+
+a {
+    text-decoration: none;
+    font-size: var(--text-base);
+    display: inline-block;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: var(--grey-base);
+}
+
+ul {
+    list-style: none;
+}
+
+span {
+    display: inline-block;
+}
+
+.small-text {
+    font-size: var(--text-sm);
+}
+
+
+
+/* -------------------------------------------- COMPONENT CSS STYLES -------------------------------------------- */
 /* 3. Common Layout Classes */
 .dashboard-container {
     display: flex;
@@ -34,25 +191,85 @@ body {
 
 /* 4. Reusable Component Styles */
 .btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
+    font-size: var(--text-base);
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 10px;
 }
 
-.btn-primary { background-color: var(--secondary-color); color: white; }
-.btn-primary:hover { background-color: #2980b9; }
+.btn-primary { 
+    background-color: var(--primary-base);
+    color: var(--white);
+    border: 2px solid var(--primary-base);
+    border-radius: 12px;
+    padding: 10px 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    /* Smooth transition for the color change */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.btn-primary:hover {
+    color: var(--white);
+    border: 2px solid var(--primary-shade);
+    transform: scale(1.05, 1.05);
+    box-shadow: 0px 3px 6px var(--grey-base);
+    background-color: var(--primary-shade);
+    color: var(--white); /* Ensures text stays white */
+}
+
+.btn-secondary { 
+    color: var(--white);
+    background-color: var(--secondary-base);
+    border: 2px solid var(--secondary-base);
+    transition: 0.5s;
+}
+.btn-secondary:hover {
+    color: var(--white);
+    background-color: var(--secondary-shade);
+    border: 2px solid var(--secondary-shade);
+    transform: scale(1.05, 1.05);
+    box-shadow: 0px 3px 6px var(--grey-base);
+}
 
 .card {
+    display: flex;
+    flex-direction: column;
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
+.logo-md {
+    width: 100px;
+}
+
+.logo-sm {
+    width: 60px;
+}
+
+/* -------------------------------------------- SECTIONAL CSS STYLES -------------------------------------------- */
+/* -------------------- HERO SECTION -------------------- */
+/* -------------------- FEATURE SECTION -------------------- */
+/* -------------------- CTA SECTION -------------------- */
+/* -------------------- FOOTER SECTION -------------------- */
+
+
+
+
+/* -------------------------------------------- FORMS CSS STYLES -------------------------------------------- */
 /* 5. Form Styles (PHP Style) */
+.logintitle {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+
 input[type="text"], input[type="password"], select {
     width: 100%;
     padding: 12px;
@@ -60,3 +277,111 @@ input[type="text"], input[type="password"], select {
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
+.error-text {
+    color: var(--danger-color); /* Bright red */
+    background-color: #fdeaea; /* Very light red background */
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--danger-color);
+    margin: 15px 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.form-control-error {
+    border: 1px solid var(--danger-color) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---Simple inline styling to mirror a professional PHP-style dashboard login---
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f4f7f6",
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+  },
+  loginBox: {
+    width: "100%",
+    maxWidth: "400px",
+    padding: "40px",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    textAlign: "center",
+  },
+  title: {
+    margin: "0 0 10px 0",
+    color: "#2c3e50",
+    fontSize: "24px",
+  },
+  subtitle: {
+    margin: "0 0 30px 0",
+    color: "#7f8c8d",
+    fontSize: "14px",
+  },
+  inputGroup: {
+    textAlign: "left",
+    marginBottom: "20px",
+  },
+  input: {
+    width: "100%",
+    padding: "12px",
+    marginTop: "5px",
+    borderRadius: "4px",
+    border: "1px solid #ddd",
+    boxSizing: "border-box",
+    fontSize: "16px",
+  },
+  button: {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#3498db",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "16px",
+    cursor: "pointer",
+    transition: "background 0.3s",
+  },
+  buttonDisabled: {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#95a5a6",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "16px",
+    cursor: "not-allowed",
+  },
+  errorMsg: {
+    color: "#e74c3c",
+    backgroundColor: "#fdeaea",
+    padding: "10px",
+    borderRadius: "4px",
+    marginBottom: "20px",
+    fontSize: "14px",
+  },
+}; */

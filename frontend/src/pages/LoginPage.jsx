@@ -20,8 +20,26 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");
+    setError("");   // Clear previous errors
     setLoading(true);
+    
+    // 1. Manual Validation Check
+    if (!username.trim() && !password.trim()) {
+        setError('Username and Password fields cannot be empty');
+        return; // Stop execution
+    } 
+
+    if (!username.trim()) {
+        setError('Username field cannot be empty');
+        return; // Stop execution
+    } 
+
+    if (!password.trim()) {
+        setError('Password field cannot be empty');
+        return; // Stop execution
+    }
+
+    // If it reaches here, both fields have text. Proceed to API call...
 
     try {
       const userData = await login(username, password);
@@ -44,122 +62,60 @@ const LoginPage = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.loginBox}>
-        <h2 style={styles.title}>Phillips Pharmacy</h2>
-        <p style={styles.subtitle}>Medical Inventory System</p>
+    // Instead of <div style={styles.container}>
+    <div
+      className="dashboard-container"
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <div className="card" style={{ width: "400px" }}>
+        <div className="logintitle">
+            <img src="/images/logo.png" alt="Phillips Pharmacy Logo" className="logo-sm" style={{alignSelf: "center"}} />
+            <div>
+                <h6>Phillips</h6>
+                <h6>Pharmacy</h6>
+            </div>
+        </div>
+        
+        <form
+          style={{ display: "flex", flexDirection: "column" }}
+          onSubmit={handleLogin}
+          noValidate
+        >
+          <label>Username</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <label>Password</label>
+          <input
+            type="password"
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <form onSubmit={handleLogin}>
-          <div style={styles.inputGroup}>
-            <label>Username</label>
-            <input
-              type="text"
-              placeholder="Enter username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              style={styles.input}
-              required
-            />
-          </div>
-
-          <div style={styles.inputGroup}>
-            <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={styles.input}
-              required
-            />
-          </div>
-
-          {error && <div style={styles.errorMsg}>{error}</div>}
+        {/* The Red Error Message */}
+          {error && <div className="error-text">{error}</div>}
 
           <button
             type="submit"
-            style={loading ? styles.buttonDisabled : styles.button}
-            disabled={loading}
+            className="btn btn-primary"
+            style={{ margin: "5% 30%"}}
           >
-            {loading ? "Authenticating..." : "Login"}
+            Login
           </button>
         </form>
       </div>
     </div>
   );
-};
-
-// Simple inline styling to mirror a professional PHP-style dashboard login
-const styles = {
-  container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    backgroundColor: "#f4f7f6",
-    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-  },
-  loginBox: {
-    width: "100%",
-    maxWidth: "400px",
-    padding: "40px",
-    backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    textAlign: "center",
-  },
-  title: {
-    margin: "0 0 10px 0",
-    color: "#2c3e50",
-    fontSize: "24px",
-  },
-  subtitle: {
-    margin: "0 0 30px 0",
-    color: "#7f8c8d",
-    fontSize: "14px",
-  },
-  inputGroup: {
-    textAlign: "left",
-    marginBottom: "20px",
-  },
-  input: {
-    width: "100%",
-    padding: "12px",
-    marginTop: "5px",
-    borderRadius: "4px",
-    border: "1px solid #ddd",
-    boxSizing: "border-box",
-    fontSize: "16px",
-  },
-  button: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#3498db",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    fontSize: "16px",
-    cursor: "pointer",
-    transition: "background 0.3s",
-  },
-  buttonDisabled: {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#95a5a6",
-    color: "white",
-    border: "none",
-    borderRadius: "4px",
-    fontSize: "16px",
-    cursor: "not-allowed",
-  },
-  errorMsg: {
-    color: "#e74c3c",
-    backgroundColor: "#fdeaea",
-    padding: "10px",
-    borderRadius: "4px",
-    marginBottom: "20px",
-    fontSize: "14px",
-  },
 };
 
 export default LoginPage;

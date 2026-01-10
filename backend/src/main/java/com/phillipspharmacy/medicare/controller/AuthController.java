@@ -35,14 +35,14 @@ public class AuthController {
             if (isMatch) {
                 return ResponseEntity.ok(user);
             } else {
+                 return ResponseEntity.status(401).body("Invalid Password");
                 // --- THE AUTO-FIXER ---
-                String newCorrectHash = passwordEncoder.encode(password);
-                System.out.println("CRITICAL: Mismatch detected. Your DB has a bad hash.");
-                System.out.println("PLEASE RUN THIS SQL IN DBEAVER TO FIX IT:");
-                System.out.println(
-                        "UPDATE staff SET upswrd = '" + newCorrectHash + "' WHERE uname = '" + username + "';");
-                // -----------------------
-                return ResponseEntity.status(401).body("Mismatch - See Terminal for FIX SQL");
+                //String newCorrectHash = passwordEncoder.encode(password);
+                // System.out.println("CRITICAL: Mismatch detected. Your DB has a bad hash.");
+                // System.out.println("PLEASE RUN THIS SQL IN DBEAVER TO FIX IT:");
+                // System.out.println(
+                        // "UPDATE staff SET upswrd = '" + newCorrectHash + "' WHERE uname = '" + username + "';");
+                // return ResponseEntity.status(401).body("Mismatch - See Terminal for FIX SQL");
             }
         }
         return ResponseEntity.status(404).body("User Not Found");
