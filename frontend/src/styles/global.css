@@ -1,0 +1,62 @@
+/* 1. CSS Variables - Change colors globally here */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --bg-color: #f4f7f6;
+    --sidebar-width: 250px;
+}
+
+/* 2. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: #333;
+}
+
+/* 3. Common Layout Classes */
+.dashboard-container {
+    display: flex;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 30px;
+    width: 100%;
+}
+
+/* 4. Reusable Component Styles */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-primary { background-color: var(--secondary-color); color: white; }
+.btn-primary:hover { background-color: #2980b9; }
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* 5. Form Styles (PHP Style) */
+input[type="text"], input[type="password"], select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
