@@ -7,7 +7,8 @@ const LoginPage = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
+  const navigate = useNavigate(); // Initialize navigate
 
   // Redirect if already logged in (Persistence check)
   useEffect(() => {
@@ -20,23 +21,23 @@ const LoginPage = ({ onLoginSuccess }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError("");   // Clear previous errors
+    setError(""); // Clear previous errors
     setLoading(true);
-    
+
     // 1. Manual Validation Check
     if (!username.trim() && !password.trim()) {
-        setError('Username and Password fields cannot be empty');
-        return; // Stop execution
-    } 
+      setError("Username and Password fields cannot be empty");
+      return; // Stop execution
+    }
 
     if (!username.trim()) {
-        setError('Username field cannot be empty');
-        return; // Stop execution
-    } 
+      setError("Username field cannot be empty");
+      return; // Stop execution
+    }
 
     if (!password.trim()) {
-        setError('Password field cannot be empty');
-        return; // Stop execution
+      setError("Password field cannot be empty");
+      return; // Stop execution
     }
 
     // If it reaches here, both fields have text. Proceed to API call...
@@ -73,13 +74,18 @@ const LoginPage = ({ onLoginSuccess }) => {
     >
       <div className="card" style={{ width: "400px" }}>
         <div className="logintitle">
-            <img src="/images/logo.png" alt="Phillips Pharmacy Logo" className="logo-sm" style={{alignSelf: "center"}} />
-            <div>
-                <h6>Phillips</h6>
-                <h6>Pharmacy</h6>
-            </div>
+          <img
+            src="/images/logo.png"
+            alt="Phillips Pharmacy Logo"
+            className="logo-sm"
+            style={{ alignSelf: "center" }}
+          />
+          <div>
+            <h6>Phillips</h6>
+            <h6>Pharmacy</h6>
+          </div>
         </div>
-        
+
         <form
           style={{ display: "flex", flexDirection: "column" }}
           onSubmit={handleLogin}
@@ -102,17 +108,32 @@ const LoginPage = ({ onLoginSuccess }) => {
             required
           />
 
-        {/* The Red Error Message */}
+          {/* The Red Error Message */}
           {error && <div className="error-text">{error}</div>}
 
           <button
             type="submit"
             className="btn btn-primary"
-            style={{ margin: "5% 30%"}}
+            style={{ margin: "5% 30%" }}
           >
             Login
           </button>
         </form>
+
+        <p style={{ marginTop: "10%", textAlign: "center" }}>
+          New Staff?
+          <span
+            onClick={() => navigate("/signup")}
+            style={{
+              color: "var(--primary-base)",
+              cursor: "pointer",
+              fontWeight: "var(--font-weight-bold)",
+              marginLeft: "5px",
+            }}
+          >
+            Sign Up Here
+          </span>
+        </p>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from "react";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import AdminDashboard from "./pages/AdminDashboard";
 import StaffDashboard from "./pages/StaffDashboard";
 import Layout from "./components/Layout";
@@ -46,6 +47,9 @@ function App() {
           }
         />
 
+        <Route path="/signup" element={<SignupPage />} />
+        {/* <Route path="/signup" element={<Navigate to="SignupPage" />} /> */}
+
         <Route
           path="/admin-dashboard"
           element={
@@ -73,6 +77,8 @@ function App() {
         />
 
         <Route path="*" element={<Navigate to="/login" />} />
+
+
       </Routes>
     </Router>
   );

@@ -35,16 +35,33 @@ public class AuthController {
             if (isMatch) {
                 return ResponseEntity.ok(user);
             } else {
-                 return ResponseEntity.status(401).body("Invalid Password");
+                return ResponseEntity.status(401).body("Invalid Password");
                 // --- THE AUTO-FIXER ---
-                //String newCorrectHash = passwordEncoder.encode(password);
+                // String newCorrectHash = passwordEncoder.encode(password);
                 // System.out.println("CRITICAL: Mismatch detected. Your DB has a bad hash.");
                 // System.out.println("PLEASE RUN THIS SQL IN DBEAVER TO FIX IT:");
                 // System.out.println(
-                        // "UPDATE staff SET upswrd = '" + newCorrectHash + "' WHERE uname = '" + username + "';");
-                // return ResponseEntity.status(401).body("Mismatch - See Terminal for FIX SQL");
+                // "UPDATE staff SET upswrd = '" + newCorrectHash + "' WHERE uname = '" +
+                // username + "';");
+                // return ResponseEntity.status(401).body("Mismatch - See Terminal for FIX
+                // SQL");
             }
         }
         return ResponseEntity.status(404).body("User Not Found");
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerStaff(@RequestBody Staff newStaff) {
+        // Check if username already exists
+        if (staffRepository.findByUnameAndIsDeleted(newStaff.getUname(), 0).isPresent()) {
+            return ResponseEntity.badRequest().body("Username is already taken");
+        }
+
+        // Hash the password before saving
+        newStaff.setUpswrd(passwordEncoder.encode(newStaff.getUpswrd()));
+        newStaff.setIsDeleted(0); // Ensure it's active
+
+        staffRepository.save(newStaff);
+        return ResponseEntity.ok("Staff registered successfully");
     }
 }

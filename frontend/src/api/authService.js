@@ -2,6 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/auth";
 
+// Add the login function to your API service.
 export const login = async (username, password) => {
   try {
     const response = await axios.post(`${API_URL}/login`, {
@@ -18,6 +19,17 @@ export const login = async (username, password) => {
   }
 };
 
+// Add the signup function to your API service.
+export const signup = async (staffData) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup`, staffData);
+    return response.data;
+  } catch (error) {
+    throw error.response ? error.response.data : "Registration failed";
+  }
+};
+
+// Add the logout function to your API service.
 export const logout = () => {
   localStorage.removeItem("user");
   window.location.href = "/login";
