@@ -122,7 +122,14 @@ const LoginPage = ({ onLoginSuccess }) => {
             required
           />
 
-          {error && <div className="error-text" style={{ color: 'red', fontSize: '0.8rem', marginTop: '5px' }}>{error}</div>}
+          {error && (
+            <div
+              className="error-text"
+              style={{ color: "red", fontSize: "0.8rem", marginTop: "5px" }}
+            >
+              {error}
+            </div>
+          )}
 
           <button
             type="submit"
@@ -133,6 +140,18 @@ const LoginPage = ({ onLoginSuccess }) => {
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+
+        <p
+          onClick={() => navigate("/forgot-password")}
+          style={{
+            cursor: "pointer",
+            color: "blue",
+            fontSize: "0.8rem",
+            textAlign: "right",
+          }}
+        >
+          Forgot Password?
+        </p>
 
         <p style={{ marginTop: "10%", textAlign: "center" }}>
           New Staff?

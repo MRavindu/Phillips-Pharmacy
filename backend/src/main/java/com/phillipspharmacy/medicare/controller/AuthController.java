@@ -3,6 +3,7 @@ package com.phillipspharmacy.medicare.controller;
 import com.phillipspharmacy.medicare.model.Staff;
 import com.phillipspharmacy.medicare.model.Role;
 import com.phillipspharmacy.medicare.repository.StaffRepository;
+import com.phillipspharmacy.medicare.service.EmailService;
 import com.phillipspharmacy.medicare.repository.RoleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,6 +28,9 @@ public class AuthController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/roles")
     public ResponseEntity<?> getRoles() {
@@ -43,7 +49,7 @@ public class AuthController {
 
         if (user != null) {
 
-             // @PostMapping("/login")
+            // @PostMapping("/login")
             // public ResponseEntity<?> login(@RequestBody Map<String, String> credentials)
             // {
             // String username = credentials.get("username").trim();
@@ -105,5 +111,49 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
+    }
+
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody Map<String, String> payload) {
+        String email = payload.get("email");
+        Staff user = staffRepository.findBySemail(email).orElse(null);
+
+        if (user == null) {
+            return ResponseEntity.status(404).body("No user found with this email.");
+        }
+
+        // Generate Token
+        String token = UUID.randomUUID().toString();
+        user.setResetToken(token);
+        user.setTokenExpiry(LocalDateTime.now().plusHours(1));
+        staffRepository.save(user);
+
+        // SEND THE REAL EMAIL
+        try {
+            emailService.sendResetPasswordEmail(user.getSemail(), token);
+            return ResponseEntity.ok("Reset link has been sent to your email.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Error sending email: " + e.getMessage());
+        }
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody Map<String, String> payload) {
+        String token = payload.get("token");
+        String newPassword = payload.get("password");
+
+        Staff user = staffRepository.findByResetToken(token).orElse(null);
+
+        if (user == null || user.getTokenExpiry().isBefore(LocalDateTime.now())) {
+            return ResponseEntity.badRequest().body("Invalid or expired token.");
+        }
+
+        // Update password and clear token
+        user.setUpswrd(passwordEncoder.encode(newPassword));
+        user.setResetToken(null);
+        user.setTokenExpiry(null);
+        staffRepository.save(user);
+
+        return ResponseEntity.ok("Password updated successfully.");
     }
 }

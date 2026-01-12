@@ -91,8 +91,8 @@ Black: #000000 (Black)
     --sidebar-width: 250px;
 
     /* FONT SIZE */
-    --text-sm: 1.2rem;
-    --text-base: 1.6rem;
+    --text-sm: 0.5rem;
+    --text-base: 0.8rem;
     --text-paragraph: 1rem;
     --text-h6: 2.2rem;
     --text-h5: 2.4rem;
@@ -192,7 +192,7 @@ span {
 /* 4. Reusable Component Styles */
 .btn {
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 400;
     transition: 0.3s;
     font-size: var(--text-base);
     text-decoration: none;
@@ -206,8 +206,7 @@ span {
     border: 2px solid var(--primary-base);
     border-radius: 12px;
     padding: 10px 30px;
-    font-size: 1.5rem;
-    font-weight: bold;
+    font-size: var(--text-paragraph);
     cursor: pointer;
     /* Smooth transition for the color change */
     transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -269,14 +268,15 @@ span {
     justify-content: center;
 }
 
-
-input[type="text"], input[type="password"], select {
+.form-control{
     width: 100%;
     padding: 12px;
     margin: 8px 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 4px;width: 100%;
+    color: var(--grey-base);
 }
+
 
 .error-text {
     color: var(--danger-color); /* Bright red */

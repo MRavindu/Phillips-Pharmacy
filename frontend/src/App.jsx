@@ -7,6 +7,9 @@ import Layout from "./components/Layout";
 // Auth Pages
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
 
 // Dashboards
 import AdminDashboard from "./pages/AdminDashboard";
@@ -41,11 +44,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Public Routes - No Sidebar */}
+        {/* Public Auth Routes - No Sidebar */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Protected Dashboard Routes */}
+        {/* Protected Dashboard Routes - Sidebar included */}
         <Route 
           path="/admin-dashboard" 
           element={
