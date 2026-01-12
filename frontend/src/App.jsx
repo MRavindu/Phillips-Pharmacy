@@ -1,5 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+
+// Public pages
+import LandingNavbar from "./components/landing/LandingNavbar";
+import Footer from "./components/landing/Footer";
+import HomePage from "./pages/landing/HomePage";
+import ServicesPage from "./pages/landing/ServicesPage";
+import AboutPage from "./pages/landing/AboutPage";
+import ContactPage from "./pages/landing/ContactPage";
 
 // Components
 import Layout from "./components/Layout";
@@ -9,7 +22,6 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
-
 
 // Dashboards
 import AdminDashboard from "./pages/AdminDashboard";
@@ -44,6 +56,17 @@ function App() {
   return (
     <Router>
       <Routes>
+
+        {/* The root path is now your HomePage */}
+        {/* The Root Path MUST be "/" for the Home Page to show immediately */}
+        <Route path="/" element={<><LandingNavbar /><HomePage /><Footer /></>} />
+
+        {/* Public Landing Pages with Navbar & Footer */}
+        <Route path="/services" element={<><LandingNavbar /><ServicesPage /><Footer /></>} />
+        <Route path="/about" element={<><LandingNavbar /><AboutPage /><Footer /></>} />
+        <Route path="/contact" element={<><LandingNavbar /><ContactPage /><Footer /></>} />
+        {/* ... Services & Contact ... */}
+
         {/* Public Auth Routes - No Sidebar */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
@@ -51,31 +74,31 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
 
         {/* Protected Dashboard Routes - Sidebar included */}
-        <Route 
-          path="/admin-dashboard" 
+        <Route
+          path="/admin-dashboard"
           element={
             <ProtectedRoute allowedRoles={["admin"]}>
               <AdminDashboard />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/receptionist-dashboard" 
+        <Route
+          path="/receptionist-dashboard"
           element={
             <ProtectedRoute allowedRoles={["receptionist"]}>
               <ReceptionistDashboard />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/delivery-dashboard" 
+        <Route
+          path="/delivery-dashboard"
           element={
             <ProtectedRoute allowedRoles={["delivery person"]}>
               <DeliveryDashboard />
             </ProtectedRoute>
-          } 
+          }
         />
 
         {/* <Route 

@@ -1,68 +1,401 @@
+/* 
+-------------------------------------------- PHILLIPS PHARMACY CSS GUIDELINES --------------------------------------------
+---------- TYPOGRAPHY ----------
+
+FONT SIZES
+12px / 16px / 20px / 24px / 32px / 40px / 48px / 62px
+
+FONT WEIGHTS
+400 / 700
+
+LINE HEIGHTS
+1.2 / 1.5
+
+LETTER SPACING
+0 / -2px
+
+FONT FAMILY
+Poppins
+
+---------- COLORS ----------
+
+PRIMARY
+Base: #339af0 (Sky Blue)
+Tint: #d0ebff (Arctic)
+Shade: #1c7ed6 (Deep Sea)
+
+SECONDARY
+Base: #9775fa (Lavendar)
+Tint: #e5dbff (Moonligh Iris)
+Shade: #7048e8 (Velvet Night)
+
+TERTIARY
+Base: #ff922b (Pumpkin)
+Tint: #ffe8cc (Dawn)
+Shade: #f76707 (Lava)
+
+GREY
+Base: #495057 (Slate)
+Tint: #f1f3f5 (Pebble)
+Shade: #212529 (Graphite)
+White: #ffffff (White)
+Black: #000000 (Black)
+
+---------- BORDER RADIUS ----------
+
+4px / 8px / 20px
+
+---------- SPACING SYSTEM ----------
+
+5px / 10px / 15px / 20px / 25px / 30px / 40px / 50px / 60px / 70px / 80px / 90px / 100px / 125px / 150px / 200px / 250px / 300px / 400px / 500px
+
+*/
+
+/* -------------------------------------------- GLOBAL CSS STYLES -------------------------------------------- */
+/* 1. CSS Variables - Change colors globally here */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    /* COLORS */
+    --primary-base: #339af0;
+    --primary-tint: #d0ebff;
+    --primary-shade: #0082ed;
+    --secondary-base: #9775fa;
+    --secondary-tint: #e5dbff;
+    --secondary-shade: #653ae7;
+    --tertiary-base: #ff922b;
+    --tertiary-tint: #ffe8cc;
+    --tertiary-shade: #fb8211;
+    --grey-base: #4a5568;
+    --grey-tint: #f3f3f3;
+    --grey-shade: #2d3748;
+    --bg-light: #f8fafc;
+    --white: #ffffff;
+    --black: #000000;
+    --success-color: #22c55e;
+    --danger-color: #f93620;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* FONT WEIGHT */
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+
+    /* LINE HEIGHTS */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+
+    /* LETTER SPACING */
+    --letter-spacing-tight: -2px;
+
+    /* FONT FAMILY */
+    --font-family: 'Poppins', sans-serif;
+
+    /* MISCELLANEOUS */
+    --nav-height: 100px; /* Update the value in the flexbox topic */
+    --sidebar-width: 250px;
+
+    /* FONT SIZE */
+    --text-sm: 0.5rem;
+    --text-base: 0.8rem;
+    --text-paragraph: 1rem;
+    --text-h6: 2.2rem;
+    --text-h5: 2.4rem;
+    --text-h4: 3.2rem;
+    --text-h3: 4rem;
+    --text-h2: 4.8rem;
+    --text-h1: 6.2rem;   
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* 2. Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--line-height-normal);
+    background-color: var(--grey-tint);
+    color: var(--grey-base);
+    /* font-size: 62.5%; */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--grey-shade);
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+    font-size: var(--text-h1);
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+h2 {
+    font-size: var(--text-h2);
+}
+
+h3 {
+    font-size: var(--text-h3);
+}
+
+h4 {
+    font-size: var(--text-h4);
+}
+
+h5 {
+    font-size: var(--text-h5);
+}
+
+h6{
+    font-size: var(--text-h6);
+}
+
+p {
+    font-size: var(--text-paragraph);
+}
+
+a {
+    text-decoration: none;
+    font-size: var(--text-base);
+    display: inline-block;
+}
+
+a:link, a:visited, a:hover, a:active {
+    color: var(--grey-base);
+}
+
+ul {
+    list-style: none;
+}
+
+span {
+    display: inline-block;
+}
+
+.small-text {
+    font-size: var(--text-sm);
+}
+
+
+
+/* -------------------------------------------- COMPONENT CSS STYLES -------------------------------------------- */
+/* -------------------- NAVIGATION SECTION -------------------- */
+
+/* --- Navigation Links --- */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.nav-link-item {
+  text-decoration: none;
+  color: var(--text-gray);
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: color 0.3s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.nav-link-item:hover {
+  color: var(--primary-base);
 }
+
+/* --- Sign Up and Login Buttons --- */
+.navbuttons-div {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+.navbtn {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 1px solid var(--primary-base);
+}
+
+.navbtn-primary {
+    background-color: var(--white);
+    color: var(--grey-base);
+}
+
+.navbtn-secondary {
+    background-color: var(--primary-base);
+    color: var(--white);
+}
+
+.navbtn-secondary:hover, .navbtn-primary:hover {
+    background-color: var(--primary-shade);
+    color: var(--white);
+}
+
+
+
+.landing-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background-color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.nav-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.nav-logo-img {
+  height: 40px;
+}
+
+.nav-brand-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+
+
+
+
+
+
+
+
+/* -------------------------------------------- SECTIONAL CSS STYLES -------------------------------------------- */
+/* -------------------- HERO SECTION -------------------- */
+/* -------------------- FEATURE SECTION -------------------- */
+/* -------------------- CTA SECTION -------------------- */
+/* -------------------- FOOTER SECTION -------------------- */
+/* --- Footer --- */
+.site-footer {
+  background-color: #1a202c;
+  color: var(--white);
+  padding: 50px 50px 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-bottom {
+  border-top: 1px solid #4a5568;
+  margin-top: 30px;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* --- Social Media Icons --- */
+.footer-social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icon {
+  color: #cbd5e0; /* Light gray */
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.social-icon:hover {
+  color: var(--primary-base); /* Turns green on hover */
+  transform: translateY(-3px);
+}
+
+.medical-link {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: #cbd5e0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.medical-link:hover {
+  color: var(--white);
+}
+
+
+
+/* -------------------------------------------- FORMS CSS STYLES -------------------------------------------- */
+
+
+/* --- Global Variables --- */
+:root {
+
+
+
+
+/* --- Hero Section --- */
+.hero-section {
+  padding: 100px 50px;
+  background: linear-gradient(to right, #f0fdf4, var(--white));
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.hero-content {
+  flex: 1;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  color: #1a202c;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  margin: 20px 0;
+  color: var(--text-gray);
+}
+
+.hero-image-container {
+  flex: 1;
+  text-align: center;
+}
+
+/* --- Service Cards --- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.service-card {
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
