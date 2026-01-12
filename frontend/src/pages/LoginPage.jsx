@@ -8,54 +8,65 @@ const LoginPage = ({ onLoginSuccess }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const navigate = useNavigate(); // Initialize navigate
+  const navigate = useNavigate();
 
   // Redirect if already logged in (Persistence check)
   useEffect(() => {
     const user = getCurrentUser();
-    if (user) {
-      if (user.urole === "admin") navigate("/admin-dashboard");
-      else navigate("/staff-dashboard");
+    if (user && user.role) {
+      redirectUserByRole(user.role.roleName);
     }
   }, [navigate]);
 
+  // Helper function to handle redirection logic
+  const redirectUserByRole = (roleName) => {
+    const role = roleName.toLowerCase();
+    if (role === "admin") {
+      navigate("/admin-dashboard");
+    } else if (role === "receptionist") {
+      navigate("/receptionist-dashboard");
+    } else if (role === "delivery person") {
+      navigate("/delivery-dashboard");
+    } else if (role === "doctor") {
+      navigate("/doctor-dashboard");
+    } else if (role === "pharmacist") {
+      navigate("/pharmacist-dashboard");
+    } else {
+      // Default fallback
+      navigate("/login");
+    }
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
-    setLoading(true);
+    setError("");
 
-    // 1. Manual Validation Check
-    if (!username.trim() && !password.trim()) {
+    // Validation
+    if (!username.trim() || !password.trim()) {
       setError("Username and Password fields cannot be empty");
-      return; // Stop execution
+      return;
     }
 
-    if (!username.trim()) {
-      setError("Username field cannot be empty");
-      return; // Stop execution
-    }
-
-    if (!password.trim()) {
-      setError("Password field cannot be empty");
-      return; // Stop execution
-    }
-
-    // If it reaches here, both fields have text. Proceed to API call...
+    setLoading(true);
 
     try {
       const userData = await login(username, password);
 
-      // 1. Update the Global State in App.jsx
-      onLoginSuccess(userData);
+      // 1. Update Global State/LocalStorage
+      if (onLoginSuccess) {
+        onLoginSuccess(userData);
+      } else {
+        // Fallback if App.jsx isn't passing the prop yet
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
 
       // 2. Role-based Redirection
-      if (userData.urole === "admin") {
-        navigate("/admin-dashboard");
+      if (userData?.role?.roleName) {
+        redirectUserByRole(userData.role.roleName);
       } else {
-        navigate("/staff-dashboard");
+        setError("User role not assigned. Please contact Admin.");
       }
     } catch (err) {
-      // This catches 401, 403, and Network Errors
       setError(typeof err === "string" ? err : "Invalid username or password");
     } finally {
       setLoading(false);
@@ -63,7 +74,6 @@ const LoginPage = ({ onLoginSuccess }) => {
   };
 
   return (
-    // Instead of <div style={styles.container}>
     <div
       className="dashboard-container"
       style={{
@@ -96,27 +106,31 @@ const LoginPage = ({ onLoginSuccess }) => {
             type="text"
             className="form-control"
             placeholder="Username"
+            value={username}
             onChange={(e) => setUsername(e.target.value)}
+            disabled={loading}
             required
           />
           <label>Password</label>
           <input
             type="password"
+            className="form-control"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
             required
           />
 
-          {/* The Red Error Message */}
-          {error && <div className="error-text">{error}</div>}
+          {error && <div className="error-text" style={{ color: 'red', fontSize: '0.8rem', marginTop: '5px' }}>{error}</div>}
 
           <button
             type="submit"
             className="btn btn-primary"
             style={{ margin: "5% 30%" }}
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
@@ -127,7 +141,7 @@ const LoginPage = ({ onLoginSuccess }) => {
             style={{
               color: "var(--primary-base)",
               cursor: "pointer",
-              fontWeight: "var(--font-weight-bold)",
+              fontWeight: "bold",
               marginLeft: "5px",
             }}
           >
