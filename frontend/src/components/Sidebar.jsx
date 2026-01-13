@@ -32,7 +32,7 @@ const Sidebar = ({ user }) => {
       {/* Added for clarity */}
       <hr />
       <nav style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-        <Link to="/" style={{ color: "white", textDecoration: "none" }}>
+        <Link to="#" style={{ color: "white", textDecoration: "none" }}>
           Dashboard
         </Link>
 

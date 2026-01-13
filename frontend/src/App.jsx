@@ -28,7 +28,15 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ReceptionistDashboard from "./pages/ReceptionistDashboard";
 import DeliveryDashboard from "./pages/DeliveryDashboard";
 // import DoctorDashboard from "./pages/DoctorDashboard";
-// import PharmacistDashboard from "./pages/PharmacistDashboard";
+import PharmacistDashboard from "./pages/PharmacistDashboard";
+
+// Sub pages of users
+import PharmacistSidebar from "./components/layout/PharmacistSidebar";
+import InventoryPage from "./pages/pharmacist/InventoryPage";
+import AlertsPage from "./pages/pharmacist/AlertsPage";
+import PrescriptionView from "./pages/pharmacist/PrescriptionView";
+import ReportsPage from "./pages/pharmacist/ReportsPage";
+
 
 /**
  * ProtectedRoute Component
@@ -110,14 +118,21 @@ function App() {
           } 
         /> */}
 
-        {/* <Route 
+        <Route 
           path="/pharmacist-dashboard" 
           element={
             <ProtectedRoute allowedRoles={["pharmacist"]}>
               <PharmacistDashboard />
             </ProtectedRoute>
           } 
-        /> */}
+        />
+
+        {/* Pharmacist Routes */}
+        
+        <Route path="/pharmacist/inventory" element={<><PharmacistSidebar /><InventoryPage /></>} />
+        <Route path="/pharmacist/alerts" element={<><PharmacistSidebar /><AlertsPage /></>} />
+        <Route path="/pharmacist/prescriptions" element={<><PharmacistSidebar /><PrescriptionView /></>} />
+        <Route path="/pharmacist/reports" element={<><PharmacistSidebar /><ReportsPage /></>} />
 
         {/* Default Redirects */}
         <Route path="/" element={<Navigate to="/login" replace />} />

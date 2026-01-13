@@ -241,3 +241,130 @@ span {
     border: 1px solid var(--danger-color) !important;
 }
 
+
+/* -------------------------------------------- PHARMACIST PAGE CSS STYLES -------------------------------------------- */
+
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.custom-table th {
+  text-align: left;
+  padding: 12px;
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.custom-table td {
+  padding: 15px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.badge.success { background-color: #dcfce7; color: #166534; }
+.badge.danger { background-color: #fee2e2; color: #991b1b; }
+.badge.pending { background-color: #fef9c3; color: #854d0e; }
+
+.inventory-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 10px 40px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e0;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  top: 12px;
+  color: #a0aec0;
+}
+
+/* Modal Styling */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 450px;
+}
+
+.btn-icon {
+  background: none; border: none; cursor: pointer; padding: 5px; font-size: 1.1rem; color: var(--primary-base);
+}
+.btn-icon.delete { color: #e53e3e; }
+.btn-icon.cart { color: #3182ce; }
+
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: #1e293b;
+  color: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  background: #334155;
+  color: #22c55e; /* Pharmacy Green */
+}
+
+.active-link {
+  background-color: #22c55e !important; /* Pharmacy Green */
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Adjust the main content to slide right of the sidebar */
+.dashboard-content {
+  margin-left: 260px;
+  padding: 40px;
+  width: calc(100% - 260px);
+}
