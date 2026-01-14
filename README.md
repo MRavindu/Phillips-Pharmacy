@@ -1,31 +1,65 @@
-This is a comprehensive `README.md` for your **Phillips Pharmacy & Medicare** system. It covers the full stack architecture we have built, from the React frontend to the Spring Boot/MySQL backend.
+### Comprehensive README.md for
+
+# ⚖️ Phillips Pharmacy & Medicare Management System
 
 ---
 
 ### `README.md`
 
-# ⚖️ Phillips Pharmacy & Medicare Management System
-
 A full-stack Pharmacy Management System (PMS) designed for a modern healthcare facility. This application features a public-facing landing page for patients and a robust, role-based dashboard for pharmacists to manage inventory, sales, and prescriptions.
 
-## 🚀 1. Application Details
+## 📌 1. Project Overview
 
-- **Frontend:** React.js (Vite), React Router, Axios, React Icons.
-- **Backend:** Spring Boot, Java 17, Spring Data JPA, Hibernate.
-- **Database:** MySQL 8.0.
-- **Key Features:**
-- **Public Landing Page:** Home, Services, and About sections.
-- **Authentication:** Custom Login and Sign-up for users and staff.
-- **Inventory & POS:** Real-time stock management with a Point-of-Sale cart system.
-- **Stock Alerts:** Automated tracking for low stock levels and expiring medications.
-- **Financial Reporting:** Revenue tracking with custom date ranges.
-- **Prescription Portal:** Digital prescription upload and approval system.
+Phillips Pharmacy & Medicare Management System is a full-stack pharmacy inventory and point-of-sale (POS) platform built with a React Typescript frontend and a Spring Boot + MySQL backend. It enables inventory tracking, sales transaction handling, prescription management, user authentication, and role-based interfaces for pharmacists, receptionists, and general users.
+
+This repo is designed to support real-world pharmacy operations — from stock control to financial reporting — in a maintainable, scalable codebase optimized for future enhancements.
+
+## 🚀 2. Features
+
+### 🧑‍💻 User Interfaces
+
+- Public Landing — Home, Services, About pages
+- Authentication — Signup/Login with form validation
+- Role-Based Dashboards
+- Pharmacist — Inventory controls, low stock alerts, reports
+- Receptionist — Prescription management, customer lookup
+- Admin — User & system configuration
+
+### 📦 Inventory & Sales
+
+- Track real-time stock levels
+- Add, edit, delete medicine entries
+- Point-of-Sale module with cart functionality
+- Automated alerts for low stock / expired drugs
+
+### 📊 Reporting
+
+- Revenue tracking over time
+- Exportable financial summaries
+- Custom filters for date ranges
+
+### 🗄️ Backend Logic
+
+- RESTful API using Spring Boot
+- Database model with medicine, sale, user, and invoice tables
+- Authentication middleware + role access control
+- Hibernate ORM via Spring Data JPA
+
+## 🛠️ 3. Tech Stack
+
+| Layer      | Technology                                       |
+| ---------- | ------------------------------------------------ |
+| Frontend   | React + TypeScript, Vite, Axios                  |
+| Backend    | Spring Boot, Java 17, Spring Data JPA, Hibernate |
+| Database   | MySQL 8+                                         |
+| Tools      | GitHub, Maven, NPM, VS Code / IntelliJ           |
+| Deployment | TBD (Docker / Cloud Options)                     |
 
 ---
 
-## 📂 2. File Hierarchy
+## 📂 4. Code Structure
 
-### **Frontend (React)**
+### **🌐 Frontend (React)**
 
 ```text
 frontend
@@ -44,12 +78,12 @@ frontend
     │       └── Sidebar.jsx
     ├── pages/
     │       ├── auth/             # Login.jsx, SignUp.jsx
-    │       ├── landing/          # HomePage.jsx, ServicesPage.jsx
+    │       ├── landing/
     │       │     ├── AboutPage.jsx
     │       │     ├── ContactPage.jsx
     │       │     ├── HomePage.jsx
     │       │     └── ServicesPage.jsx
-    │       ├──  pharmacist/       # InventoryPage.jsx, AlertsPage.jsx, ReportsPage.jsx
+    │       ├──  pharmacist/
     │       │     ├── AlertsPage.jsx
     │       │     ├── InventoryPage.jsx
     │       │     ├── PrescriptionView.jsx
@@ -62,7 +96,7 @@ frontend
     │       ├── ReceptionistDashboard.jsx
     │       ├── ResetPassword.jsx
     │       └── SigunupPage.jsx
-    ├── services/             # medicineService.js (API Calls)
+    ├── services/
     │       └── medicineService.js
     ├── styles/               # global.css, index.css
     │       └── global.css
@@ -72,26 +106,44 @@ frontend
 
 ```
 
-### **Backend (Spring Boot)**
+### **🛡️ Backend (Spring Boot)**
 
 ```text
 src/main/java/com/phillipspharmacy/medicare/
-├── controller/           # MedicineController, ReportController
+├── config/
+│      └──SecurityConfig.java
+├── controller/
+│      ├── AuthController.java
+│      ├── MedicineController.java
+│      └── PharmacistReportController.java
 ├── model/                # Medicine, Sale, SaleItem, User
+│      ├── Medicine.java
+│      ├── OrderItem.java
+│      ├── Role.java
+│      ├── Sale.java
+│      ├── SaleItem.java
+│      └── Staff.java
 ├── repository/           # MedicineRepository, SaleRepository, UserRepository
-└── MedicareApplication.java
+│      ├── MedicineRepository.java
+│      ├── RoleRepository.java
+│      ├── SaleRepository.java
+│      └── StaffRepository.java
+├── service/
+│      └──EmailService.java
+├── PhillipsPharmacySystemApplication.java
+├── src/main/resources/     — Config files (application.properties)
+└── pom.xml
 
 ```
 
----
-
-## 🛠️ 3. How to Get the Site Up
+## 🛠️ 5. How to Get the Site Up
 
 ### **Prerequisites**
 
-- Node.js (v18+)
-- JDK 21
+- Node.js ≥ 18
+- Java JDK ≥ 21
 - MySQL Server
+- Git
 
 ### **Step 1: Database Setup**
 
@@ -105,13 +157,20 @@ src/main/java/com/phillipspharmacy/medicare/
 3. Run the application using your IDE or:
 
 ```bash
-./mvnw spring-boot:run
+mvn clean install
+mvn spring-boot:run
 
 ```
 
 ### **Step 3: Frontend Setup**
 
 1. Navigate to the frontend folder.
+
+```bash
+cd frontend
+
+```
+
 2. Install dependencies:
 
 ```bash
@@ -130,45 +189,73 @@ npm run dev
 
 ---
 
-## 📊 4. Database Structure
+## 📊 6. Database Structure
 
 ### **Table: `medicines**`
 
-| Column           | Type      | Description            |
-| ---------------- | --------- | ---------------------- |
-| `id`             | Long (PK) | Unique Identifier      |
-| `name`           | String    | Name of the medicine   |
-| `stock_quantity` | Integer   | Current units in stock |
-| `unit_price`     | Double    | Price per unit         |
-| `expiry_date`    | LocalDate | Date of expiration     |
+| Column           | Type      | Description                             |
+| ---------------- | --------- | --------------------------------------- |
+| `id`             | Long (PK) | Unique identifier for each medicine     |
+| `brand`          | String    | Brand or manufacturer name              |
+| `category`       | String    | Medicine category (e.g., Antibiotic)    |
+| `description`    | String    | Description or usage details            |
+| `expiry_date`    | DateTime  | Date the medicine expires               |
+| `name`           | String    | Generic or display name of the medicine |
+| `stock_quantity` | Integer   | Current units available in stock        |
+| `unit_price`     | Double    | Selling price per unit                  |
 
 ### **Table: `sales**`
 
-| Column         | Type          | Description         |
-| -------------- | ------------- | ------------------- |
-| `id`           | Long (PK)     | Receipt ID          |
-| `sale_date`    | LocalDateTime | Time of transaction |
-| `total_amount` | Double        | Total bill value    |
+| Column           | Type      | Description                             |
+| ---------------- | --------- | --------------------------------------- |
+| `id`             | Long (PK) | Unique receipt / transaction ID         |
+| `payment_method` | String    | Payment type (Cash, Card, Online, etc.) |
+| `sale_date`      | DateTime  | Date and time of the transaction        |
+| `total_amount`   | Double    | Total value of the sale                 |
+
+### **Table: `sale_item**`
+
+| Column          | Type      | Description                               |
+| --------------- | --------- | ----------------------------------------- |
+| `id`            | Long (PK) | Unique sale item identifier               |
+| `medicine_name` | String    | Name of the medicine sold                 |
+| `price_at_sale` | Double    | Unit price at the time of sale            |
+| `quantity`      | Integer   | Number of units sold                      |
+| `sale_id`       | Long (FK) | Reference to the related sale transaction |
+
+### **Table: `staff**`
+
+| Column         | Type      | Description                                |
+| -------------- | --------- | ------------------------------------------ |
+| `staffid`      | Long (PK) | Unique staff identifier                    |
+| `snic`         | String    | National Identity Card (NIC) number        |
+| `sname`        | String    | Full name of the staff member              |
+| `semail`       | String    | Staff email address                        |
+| `stelno`       | String    | Staff contact number                       |
+| `uname`        | String    | Username for system login                  |
+| `upswrd`       | String    | Encrypted password BCrypt                  |
+| `role_id`      | Integer   | Role identifier (FK to roles table)        |
+| `is_deleted`   | Integer   | Soft delete flag (0 = Active, 1 = Deleted) |
+| `reset_token`  | String    | Password reset token                       |
+| `token_expiry` | DateTime  | Expiration time of reset token             |
+
+### **Table: `roles**`
+
+| Column      | Type    | Description                            |
+| ----------- | ------- | -------------------------------------- |
+| `role_id`   | Integer | Unique role identifier                 |
+| `role_name` | String  | Role name (Admin, Pharmacist, Cashier) |
 
 ---
 
-## 🔐 5. Security & Roles
+## 🧪 7. API Endpoints
 
-The application implements **Role-Based Access Control (RBAC)**.
-
-- **Public:** Can view the landing page and register.
-- **Pharmacist:** Can access `/pharmacist/*` routes. If a non-pharmacist attempts to access these, they are redirected to the home page via the `ProtectedRoute` component.
-
----
-
-## 📝 6. Future Enhancements
-
-- [ ] Integration with SMS gateway for stock alerts.
-- [ ] PDF Receipt generation for POS.
-- [ ] Multi-supplier management system.
+| Method | Endpoint             | Description            |
+| ------ | -------------------- | ---------------------- |
+| GET    | `/api/medicines`     | List all medicines     |
+| POST   | `/api/medicines`     | Add new medicine       |
+| PUT    | `/api/medicines/:id` | Update stock           |
+| DELETE | `/api/medicines/:id` | Remove item            |
+| GET    | `/api/reports`       | Generate sales reports |
 
 ---
-
-### Next Step
-
-Would you like me to generate a **`requirements.txt`** or a list of **API Endpoints** documentation to accompany this README?
