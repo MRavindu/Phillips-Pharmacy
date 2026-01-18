@@ -1,13 +1,14 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { FaBox, FaBell, FaFilePrescription, FaChartBar, FaSignOutAlt } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { FaBox, FaBell, FaFilePrescription, FaChartBar, FaSignOutAlt, FaDashcube } from "react-icons/fa";
 import { logout } from "../../api/authService";
 
 const PharmacistSidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Helper to highlight active link
-  const isActive = (path) => location.pathname === path ? "active-link" : "";
+  const isActive = (path) => location.pathname === path ? "staff-sidebar-active-item" : "";
 
     const handleLogout = () => {
       logout();
@@ -16,32 +17,41 @@ const PharmacistSidebar = () => {
     };
 
   return (
-    <div className="sidebar">
-      <div className="sidebar-header">
-        <h3>Phillips Pharmacy</h3>
-        <p>Pharmacist Panel</p>
+    <div className="staff-sidebar">
+      <div className="staff-sidebar-header">
+        <div className="staff-sidebar-logo-image">
+          <img src="/images/logo.png" alt="Phillips Pharmacy Logo" className="logo-vsm" style={{ alignSelf: "center" }}/>
+          <div>
+            <h6 className="staff-sidebar-logo">Phillips Pharmacy</h6>
+          </div>
+        </div>
+        <p className="user-role-identification">Pharmacist Panel</p>
       </div>
       
-      <nav className="sidebar-nav">
-        <Link to="/pharmacist/inventory" className={`nav-item ${isActive('/pharmacist/inventory')}`}>
+      <nav className="staff-sidebar-navblock">
+        <Link to="/pharmacist/dashboard" className={`staff-nav-item ${isActive('/pharmacist-dashboard')}`}>
+          <FaDashcube /> <span>Pharmacist Overview</span>
+        </Link>
+
+        <Link to="/pharmacist/inventory" className={`staff-nav-item ${isActive('/pharmacist/inventory')}`}>
           <FaBox /> <span>Inventory & POS</span>
         </Link>
         
-        <Link to="/pharmacist/alerts" className={`nav-item ${isActive('/pharmacist/alerts')}`}>
+        <Link to="/pharmacist/alerts" className={`staff-nav-item ${isActive('/pharmacist/alerts')}`}>
           <FaBell /> <span>Stock Alerts</span>
         </Link>
         
-        <Link to="/pharmacist/prescriptions" className={`nav-item ${isActive('/pharmacist/prescriptions')}`}>
+        <Link to="/pharmacist/prescriptions" className={`staff-nav-item ${isActive('/pharmacist/prescriptions')}`}>
           <FaFilePrescription /> <span>Prescriptions</span>
         </Link>
         
-        <Link to="/pharmacist/reports" className={`nav-item ${isActive('/pharmacist/reports')}`}>
+        <Link to="/pharmacist/reports" className={`staff-nav-item ${isActive('/pharmacist/reports')}`}>
           <FaChartBar /> <span>Sales Reports</span>
         </Link>
       </nav>
 
-      <div className="sidebar-footer">
-        <Link to="/login" className="logout-btn" onClick={handleLogout}><FaSignOutAlt /> Logout</Link>
+      <div className="staff-sidebar-footer">
+        <Link to="/login" className="staff-logout-btn" onClick={handleLogout}><FaSignOutAlt /> Logout</Link>
       </div>
     </div>
   );

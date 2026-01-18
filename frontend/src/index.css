@@ -65,7 +65,7 @@ Black: #000000 (Black)
     --tertiary-tint: #ffe8cc;
     --tertiary-shade: #fb8211;
     --grey-base: #4a5568;
-    --grey-tint: #f3f3f3;
+    /* --grey-tint: #f3f3f3; */
     --grey-shade: #2d3748;
     --bg-light: #f8fafc;
     --white: #ffffff;
@@ -92,7 +92,7 @@ Black: #000000 (Black)
 
     /* MISCELLANEOUS */
     --nav-height: 100px; /* Update the value in the flexbox topic */
-    --sidebar-width: 250px;
+    /* --sidebar-width: 250px; */
 
     /* FONT SIZE */
     --text-sm: 0.5rem;
@@ -117,7 +117,7 @@ body {
     font-family: var(--font-family);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
-    background-color: var(--grey-tint);
+    background-color: var(--bg-light);
     color: var(--grey-base);
     /* font-size: 62.5%; */
 }

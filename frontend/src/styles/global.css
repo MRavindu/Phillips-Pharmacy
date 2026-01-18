@@ -12,8 +12,9 @@
     --tertiary-tint: #ffe8cc;
     --tertiary-shade: #fb8211;
     --grey-base: #495057;
-    --grey-tint: #f3f3f3;
+    --grey-tint: #bebebe;
     --grey-shade: #212529;
+    --bg-light: #f8fafc;
     --white: #ffffff;
     --black: #000000;
     --success-color: #27ae60;
@@ -35,7 +36,7 @@
 
     /* MISCELLANEOUS */
     --nav-height: 100px; /* Update the value in the flexbox topic */
-    --sidebar-width: 250px;
+    --sidebar-width: 18%;
 
     /* FONT SIZE */
     --text-sm: 0.5rem;
@@ -60,7 +61,7 @@ body {
     font-family: var(--font-family);
     font-weight: var(--font-weight-normal);
     line-height: var(--line-height-normal);
-    background-color: var(--grey-tint);
+    background-color: var(--bg-light);
     color: var(--grey-base);
     /* font-size: 62.5%; */
 }
@@ -198,6 +199,10 @@ span {
     width: 60px;
 }
 
+.logo-vsm {
+    width: 40px;
+}
+
 /* -------------------------------------------- SECTIONAL CSS STYLES -------------------------------------------- */
 /* -------------------- HERO SECTION -------------------- */
 /* -------------------- FEATURE SECTION -------------------- */
@@ -326,41 +331,7 @@ span {
 .btn-icon.delete { color: #e53e3e; }
 .btn-icon.cart { color: #3182ce; }
 
-.sidebar {
-  width: 260px;
-  height: 100vh;
-  background: #1e293b;
-  color: white;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
 
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 15px;
-  color: #94a3b8;
-  text-decoration: none;
-  border-radius: 8px;
-  margin-bottom: 5px;
-  transition: 0.3s;
-}
-
-.nav-item:hover {
-  background: #334155;
-  color: #22c55e; /* Pharmacy Green */
-}
-
-.active-link {
-  background-color: #22c55e !important; /* Pharmacy Green */
-  color: white !important;
-  font-weight: bold;
-}
 
 /* Adjust the main content to slide right of the sidebar */
 .dashboard-content {
