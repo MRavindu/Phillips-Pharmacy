@@ -159,6 +159,7 @@ src/main/java/com/phillipspharmacy/medicare/
 ```bash
 mvn clean install
 mvn spring-boot:run
+mvnw clean spring-boot:run
 
 ```
 

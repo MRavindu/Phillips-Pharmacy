@@ -1,0 +1,85 @@
+/* ================================================================
+STAFF SIDEBAR STYLES (Common for all users: Admin, Pharmacist, Staff)
+================================================================*/
+.staff-sidebar{
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--grey-shade);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.staff-sidebar-header{
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--grey-border);
+    padding-bottom: 10px;
+    color: var(--grey-tint);
+}
+
+.staff-sidebar-logo-image {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.staff-sidebar-logo{
+    color: var(--white);
+}
+
+.user-role-identification {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.staff-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.staff-nav-item:hover {
+  background: #334155;
+  color: var(--primary-base);
+}
+
+.staff-sidebar-active-item {
+  background-color: var(--primary-base) !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.staff-sidebar-footer {
+    margin-top: auto;
+    border-top: 1px solid var(--grey-border);
+    padding-top: 10px;
+}
+
+.staff-logout-btn:hover {
+  background: #334155;
+  color: var(--danger-color);
+}
+
+.staff-logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-gray);
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* ================================================================
+5. DASHBOARD & STAFF STYLES (Common for all users: Admin, Pharmacist, Staff)
+================================================================*/
