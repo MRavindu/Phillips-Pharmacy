@@ -12,8 +12,11 @@ import java.time.LocalDate;
 public interface MedicineRepository extends JpaRepository<Medicine, Long> {
     
     // 1. Expiry Tracker: Finds medicines expiring between two dates
-    List<Medicine> findByExpiryDateBetween(LocalDate start, LocalDate end);
+    List<Medicine> findByExpdateBetween(LocalDate start, LocalDate end);
 
     // 3. Low Stock Tracker: Threshold is passed from controller
-    List<Medicine> findByStockQuantityLessThan(Integer threshold);
+    List<Medicine> findByQuantityLessThan(Integer threshold);
+
+    // Count medicines where expdate is between today and 30 days from now
+Long countByExpdateBetween(LocalDate start, LocalDate end);
 }

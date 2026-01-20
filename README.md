@@ -116,14 +116,14 @@ src/main/java/com/phillipspharmacy/medicare/
 │      ├── AuthController.java
 │      ├── MedicineController.java
 │      └── PharmacistReportController.java
-├── model/                # Medicine, Sale, SaleItem, User
+├── model/
 │      ├── Medicine.java
 │      ├── OrderItem.java
 │      ├── Role.java
 │      ├── Sale.java
 │      ├── SaleItem.java
 │      └── Staff.java
-├── repository/           # MedicineRepository, SaleRepository, UserRepository
+├── repository/
 │      ├── MedicineRepository.java
 │      ├── RoleRepository.java
 │      ├── SaleRepository.java
