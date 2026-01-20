@@ -83,3 +83,105 @@ STAFF SIDEBAR STYLES (Common for all users: Admin, Pharmacist, Staff)
 /* ================================================================
 5. DASHBOARD & STAFF STYLES (Common for all users: Admin, Pharmacist, Staff)
 ================================================================*/
+
+
+/* ================================================================
+5. PHARMACIST STYLES (unique to Pharmacist UI designing)
+================================================================*/
+/*---------------- INVENTORY & POS ----------------*/
+/* Cart Sidebar Styles */
+.cart-grid-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #666;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.cart-grid-row {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+}
+
+.cart-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.cart-qty-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.qty-btn {
+  background: #f0f0f0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.qty-btn:hover {
+  background: #e0e0e0;
+}
+
+.cart-item-price {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.cart-remove-icon {
+  color: #ff4d4d;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.cart-summary {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 2px dashed #eee;
+}
+
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.total-price {
+  color: #2e7d32;
+  font-size: 1.1rem;
+}
+
+.btn-checkout-full {
+  width: 100%;
+  padding: 12px;
+  background: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
