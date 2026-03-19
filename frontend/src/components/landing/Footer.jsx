@@ -14,31 +14,35 @@ const Footer = () => {
       <div className="footer-content">
         {/* About Section */}
         <div className="footer-section" style={{ minWidth: "700px" }}>
-          <h3 style={{ color: "var(--primary-base)" }}>Phillips Pharmacy</h3>
-          <p>Your trusted partner in healthcare. Providing quality medicines since 1998.</p>
+          <div className="foot-logo-container" onClick={() => navigate("/")}>
+            <img src="/images/logo.png" alt="Logo" className="foot-logo-img" />
+            <h4 style={{ color: "var(--white)" }}>Phillips Pharmacy</h4>
+          </div>
+          <p style={{margin: '15px 0px'}}>Your trusted partner in healthcare.<br />Providing quality medicines since 1998.</p>
         </div>
 
         {/* Quick Links */}
         <div className="footer-section">
-          <h4>Quick Links</h4>
+          <h5 style={{ color: 'var(--secondary-tint)', margin: '15px', textAlign: 'center'}}>Quick Links</h5>
           <ul style={{ listStyle: "none", padding: 0, textAlign: "center" }}>
-            <li><a href="/" className="nav-link-item" style={{color: '#cbd5e0'}}>Home</a></li>
-            <li><a href="/about" className="nav-link-item" style={{color: '#cbd5e0'}}>About Us</a></li>
-            <li><a href="/services" className="nav-link-item" style={{color: '#cbd5e0'}}>Services</a></li>
-            <li><a href="#" className="nav-link-item" style={{color: '#cbd5e0'}}>Careers</a></li>
-            <li><a href="/contact" className="nav-link-item" style={{color: '#cbd5e0'}}>Contact</a></li>
+            <li><a href="/" className="nav-link-item">Home</a></li>
+            <li><a href="/about" className="nav-link-item">About Us</a></li>
+            <li><a href="/services" className="nav-link-item">Services</a></li>
+            <li><a href="#" className="nav-link-item">Careers</a></li>
+            <li><a href="/contact" className="nav-link-item">Contact</a></li>
           </ul>
         </div>
 
         {/* Medical Portals Section */}
         <div className="footer-section" style={{textAlign: "right"}}>
-          <h4>Channeling Partners</h4>
-          <div style={{ marginTop: "15px" }}>
+          <h5 style={{ color: 'var(--secondary-tint)', margin: '15px 0px'}}>e Channeling</h5>
+          <div style={{ marginTop: "15px"}}>
+            <a href="#"></a>
             <a href="https://www.doc.lk" target="_blank" rel="noreferrer" className="medical-link">
-              <FaStethoscope /> Doc990
+              Doc990 <FaStethoscope />
             </a>
             <a href="https://www.echannelling.com" target="_blank" rel="noreferrer" className="medical-link">
-              <FaExternalLinkAlt /> eChanneling
+              eChanneling <FaExternalLinkAlt />
             </a>
           </div>
           {/* Social Icons */}

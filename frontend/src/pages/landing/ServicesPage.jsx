@@ -1,35 +1,45 @@
 import React from "react";
-import { FaPrescriptionBottleAlt, FaSyringe, FaTruck, FaNotesMedical } from "react-icons/fa";
+import { FaFileMedical, FaSyringe, FaTruckMoving, FaChalkboardTeacher, FaWifi, FaGift, FaTruckLoading } from "react-icons/fa";
 
 const ServicesPage = () => {
   const services = [
     {
       title: "Prescription Refills",
-      desc: "Easily upload your prescription and get your refills processed in minutes.",
-      icon: <FaPrescriptionBottleAlt size={40} color="var(--primary-base)" />,
+      desc: "Bring the prescription your doctor provided, and get your refills processed in minutes.",
+      icon: <FaFileMedical size={40} color="var(--tertiary-base)" />,
     },
     {
       title: "Vaccinations",
       desc: "Schedule your flu shots or travel vaccines with our certified pharmacists.",
-      icon: <FaSyringe size={40} color="var(--primary-base)" />,
-    },
-    {
-      title: "Home Delivery",
-      desc: "Free island-wide delivery for orders over Rs. 5000. Fast and secure.",
-      icon: <FaTruck size={40} color="var(--primary-base)" />,
+      icon: <FaSyringe size={40} color="var(--tertiary-base)" />,
     },
     {
       title: "Health Consultations",
       desc: "Private one-on-one consultations to discuss your medication and wellness.",
-      icon: <FaNotesMedical size={40} color="var(--primary-base)" />,
+      icon: <FaChalkboardTeacher size={40} color="var(--tertiary-base)" />,
+    },
+    {
+      title: "Online Orders",
+      desc: "Easily upload your prescription and get your refills processed in minutes.",
+      icon: <FaWifi size={40} color="var(--tertiary-base)" />,
+    },
+    {
+      title: "Home Delivery",
+      desc: "Now we offer island-wide Free delivery for orders above Rs. 5000. Fast and secure.",
+      icon: <FaTruckMoving size={40} color="var(--tertiary-base)" />,
+    },
+    {
+      title: "Loyalty Offers",
+      desc: "Become one of our loyalty customer community and get opportunity to earn promotianal and Seasonal loyalty rewards.",
+      icon: <FaGift size={40} color="var(--tertiary-base)" />,
     },
   ];
 
   return (
-    <div style={{ padding: "80px 50px", backgroundColor: "#fdfdfd" }}>
+    <div style={{ padding: "80px 50px", background: "linear-gradient(to top, var(--primary-shade), var(--bg-light))" }}>
       <div style={{ textAlign: "center", marginBottom: "60px" }}>
-        <h1 style={{ fontSize: "2.5rem", color: "#2d3748" }}>Our Professional Services</h1>
-        <p style={{ color: "#718096" }}>Comprehensive healthcare solutions tailored for you.</p>
+        <h2 style={{color: "#2d3748", margin: '5% 0 0 0'}}>Our Professional <span style={{color: 'var(--primary-base)'}}>Services</span></h2>
+        <p style={{ color: "#718096", margin: '1% 0 5% 0'}}>Comprehensive healthcare solutions tailored for you.</p>
       </div>
 
       <div style={{ 
@@ -52,7 +62,7 @@ const ServicesPage = () => {
           onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
           >
             <div style={{ marginBottom: "20px" }}>{service.icon}</div>
-            <h3 style={{ marginBottom: "15px", color: "#2d3748" }}>{service.title}</h3>
+            <h6 style={{ marginBottom: "15px", color: "var(--primary-shade)" }}>{service.title}</h6>
             <p style={{ color: "#4a5568", lineHeight: "1.6" }}>{service.desc}</p>
           </div>
         ))}
