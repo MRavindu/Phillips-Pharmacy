@@ -55,22 +55,22 @@ Black: #000000 (Black)
 /* 1. CSS Variables - Change colors globally here */
 :root {
     /* COLORS */
-    --primary-base: #339af0;
-    --primary-tint: #d0ebff;
-    --primary-shade: #0082ed;
-    --secondary-base: #9775fa;
-    --secondary-tint: #e5dbff;
-    --secondary-shade: #653ae7;
+    --primary-base: #109FA8;
+    --primary-tint: #69f5ff;
+    --primary-shade: #007179;
+    --secondary-base: #70CB49;
+    --secondary-tint: #a3ff7b;
+    --secondary-shade: #41921f;
     --tertiary-base: #ff922b;
-    --tertiary-tint: #ffe8cc;
+    --tertiary-tint: #f6be7a;
     --tertiary-shade: #fb8211;
-    --grey-base: #4a5568;
-    /* --grey-tint: #f3f3f3; */
-    --grey-shade: #2d3748;
+    --grey-base: #495057;
+    --grey-tint: #bebebe;
+    --grey-shade: #212529;
     --bg-light: #f8fafc;
     --white: #ffffff;
     --black: #000000;
-    --success-color: #22c55e;
+    --success-color: #27ae60;
     --danger-color: #f93620;
 
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -163,9 +163,9 @@ a {
     display: inline-block;
 }
 
-a:link, a:visited, a:hover, a:active {
+/* a:link, a:visited, a:hover, a:active {
     color: var(--grey-base);
-}
+} */
 
 ul {
     list-style: none;
@@ -277,7 +277,7 @@ span {
 /* -------------------- FOOTER SECTION -------------------- */
 /* --- Footer --- */
 .site-footer {
-  background-color: #1a202c;
+  background-color: var(--primary-shade);
   color: var(--white);
   padding: 50px 50px 20px;
 }
@@ -286,7 +286,18 @@ span {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 1%;
+}
+
+.foot-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.foot-logo-img {
+  height: 60px;
 }
 
 .footer-section {
@@ -307,10 +318,11 @@ span {
   display: flex;
   gap: 15px;
   margin-top: 20px;
+  justify-content: right;
 }
 
 .social-icon {
-  color: #cbd5e0; /* Light gray */
+  color: var(--white);
   font-size: 1.5rem;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -324,15 +336,16 @@ span {
 .medical-link {
   font-size: 0.85rem;
   text-decoration: none;
-  color: #cbd5e0;
+  color: var(--white);
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
+  justify-content: right;
 }
 
 .medical-link:hover {
-  color: var(--white);
+  color: var(--primary-base);
 }
 
 

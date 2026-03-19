@@ -2,18 +2,18 @@
 /* 1. CSS Variables - Change colors globally here */
 :root {
     /* COLORS */
-    --primary-base: #339af0;
-    --primary-tint: #d0ebff;
-    --primary-shade: #0082ed;
-    --secondary-base: #9775fa;
-    --secondary-tint: #e5dbff;
-    --secondary-shade: #653ae7;
+    --primary-base: #109FA8;
+    --primary-tint: #69f5ff;
+    --primary-shade: #007179;
+    --secondary-base: #70CB49;
+    --secondary-tint: #a3ff7b;
+    --secondary-shade: #41921f;
     --tertiary-base: #ff922b;
     --tertiary-tint: #ffe8cc;
     --tertiary-shade: #fb8211;
     --grey-base: #495057;
     --grey-tint: #bebebe;
-    --grey-shade: #212529;
+    --grey-shade: #2d3748;
     --bg-light: #f8fafc;
     --white: #ffffff;
     --black: #000000;
@@ -107,9 +107,9 @@ a {
     display: inline-block;
 }
 
-a:link, a:visited, a:hover, a:active {
+/* a:link, a:visited, a:hover, a:active {
     color: var(--grey-base);
-}
+} */
 
 ul {
     list-style: none;
@@ -180,6 +180,27 @@ span {
     border: 2px solid var(--secondary-shade);
     transform: scale(1.05, 1.05);
     box-shadow: 0px 3px 6px var(--grey-base);
+}
+
+.btn-tertiary { 
+    background-color: var(--tertiary-base);
+    color: var(--white);
+    border: 2px solid var(--tertiary-base);
+    border-radius: 12px;
+    padding: 10px 30px;
+    font-size: var(--text-paragraph);
+    box-shadow: 0px 3px 6px var(--grey-tint);
+    cursor: pointer;
+    /* Smooth transition for the color change */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.btn-tertiary:hover {
+    color: var(--white);
+    border: 2px solid var(--tertiary-shade);
+    transform: scale(1.05, 1.05);
+    box-shadow: 0px 3px 6px var(--grey-base);
+    background-color: var(--tertiary-shade);
+    color: var(--white); /* Ensures text stays white */
 }
 
 .card {
