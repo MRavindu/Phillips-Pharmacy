@@ -9,8 +9,8 @@ import {
 /* ================================================================
 PUBLIC PAGES
 ================================================================*/
-import LandingNavbar from "./components/landing/LandingNavbar";
-import Footer from "./components/landing/Footer";
+import LandingNavbar from "./components/navbars/LandingNavbar";
+import Footer from "./components/footers/Footer";
 import HomePage from "./pages/landing/HomePage";
 import ServicesPage from "./pages/landing/ServicesPage";
 import AboutPage from "./pages/landing/AboutPage";

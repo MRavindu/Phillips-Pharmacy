@@ -2,9 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from "./App.jsx";
-import "./styles/global.css"; // <--- IMPORT IT HERE
-import './index.css'; // <--- This line links the CSS to your entire project
-import "./styles/userstyles.css"; // <--- IMPORT IT HERE
+import "./local.css";
+// <--- This line links the CSS to your entire project
+// import "./styles/global.css"; // <--- IMPORT IT HERE
+// import './index.css'; // <--- This line links the CSS to your entire project
+// import "./styles/userstyles.css"; // <--- IMPORT IT HERE
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
