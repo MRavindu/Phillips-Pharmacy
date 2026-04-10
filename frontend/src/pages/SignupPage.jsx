@@ -119,7 +119,23 @@ const SignupPage = () => {
       style={{ justifyContent: "center", padding: "50px 0" }}
     >
       <div className="card" style={{ width: "500px" }}>
-        <h5 className="logintitle">Staff Registration</h5>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1rem" }}>
+            <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <img
+              src="/images/logo.png"
+              alt="Phillips Pharmacy Logo"
+              className="logo-sm"
+              style={{ alignSelf: "center", width: "2rem" }}
+            />
+            <div>
+              <p>Phillips</p>
+              <p>Pharmacy</p>
+            </div>
+            </a>
+        
+          <h5 className="logintitle">Staff Registration</h5>
+        </div>
+
         <form
           onSubmit={handleSignup}
           style={{ display: "flex", flexDirection: "column" }}
