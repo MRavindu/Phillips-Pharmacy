@@ -84,16 +84,21 @@ const LoginPage = ({ onLoginSuccess }) => {
     >
       <div className="card" style={{ width: "400px" }}>
         <div className="logintitle">
-          <img
-            src="/images/logo.png"
-            alt="Phillips Pharmacy Logo"
-            className="logo-sm"
-            style={{ alignSelf: "center" }}
-          />
-          <div>
-            <h6>Phillips</h6>
-            <h6>Pharmacy</h6>
-          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem" }}>
+            <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <img
+                src="/images/logo.png"
+                alt="Phillips Pharmacy Logo"
+                className="logo-sm"
+                style={{ alignSelf: "center", width: "1rem" }}
+                />
+                <div>
+                  <p>Phillips</p>
+                  <p>Pharmacy</p>
+                </div>
+              </a>
+              <h5 className="logintitle">Staff Login</h5>
+            </div>
         </div>
 
         <form
