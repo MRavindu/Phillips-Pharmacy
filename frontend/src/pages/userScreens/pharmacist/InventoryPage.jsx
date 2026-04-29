@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as medService from "../../services/medicineService";
+import * as medService from "../../../services/medicineService";
 import { FaEdit, FaTrash, FaPlus, FaSearch, FaCartPlus, FaTimes } from "react-icons/fa";
 
 const InventoryPage = () => {

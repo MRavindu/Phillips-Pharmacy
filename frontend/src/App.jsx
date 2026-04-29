@@ -19,7 +19,7 @@ import ContactPage from "./pages/landing/ContactPage";
 /* ================================================================
 COMPONENTS
 ================================================================*/
-import Layout from "./components/Layout";
+import Layout from "./components/layout/Layout";
 
 /* ================================================================
 AUTH PAGES
@@ -32,69 +32,57 @@ import ResetPassword from "./pages/auth/ResetPassword";
 /* ================================================================
 DASHBOARDS OF DIFFERENT USER ROLES
 ================================================================*/
-import AdminDashboard from "./pages/AdminDashboard";
-import ReceptionistDashboard from "./pages/ReceptionistDashboard";
-import DeliveryDashboard from "./pages/DeliveryDashboard";
-// import DoctorDashboard from "./pages/DoctorDashboard";
-import PharmacistDashboard from "./pages/PharmacistDashboard";
+import AdminDashboard from "./pages/dashboards/AdminDashboard";
+import ReceptionistDashboard from "./pages/dashboards/ReceptionistDashboard";
+import DeliveryDashboard from "./pages/dashboards/DeliveryDashboard";
+import PharmacistDashboard from "./pages/dashboards/PharmacistDashboard";
 
 /* ================================================================
 SUBPAGES OF DIFFERENT USER ROLES
 ================================================================*/
 
 /*------------ PHARMACIST SUBPAGES ------------*/
-import PharmacistSidebar from "./components/layout/PharmacistSidebar";
-import InventoryPage from "./pages/pharmacist/InventoryPage";
-import AlertsPage from "./pages/pharmacist/AlertsPage";
-import PrescriptionView from "./pages/pharmacist/PrescriptionView";
-import ReportsPage from "./pages/pharmacist/ReportsPage";
+import InventoryPage from "./pages/userScreens/pharmacist/InventoryPage";
+import AlertsPage from "./pages/userScreens/pharmacist/AlertsPage";
+import PrescriptionView from "./pages/userScreens/pharmacist/PrescriptionView";
+import ReportsPage from "./pages/userScreens/pharmacist/ReportsPage";
 
 /*------------ ADMIN SUBPAGES ------------*/
-import AdminSidebar from "./components/layout/AdminSidebar";
-import SystemLogsPage from "./pages/admin/SystemLog";
-import UserManagementPage from "./pages/admin/ManageStaff";
-import SupplierManagementPage from "./pages/admin/ManageSupplier";
-import InventoryManagementPage from "./pages/admin/ManageInventory";
-import AdminReportsPage from "./pages/admin/AdminReports";
+import SystemLogsPage from "./pages/userScreens/admin/SystemLog";
+import UserManagementPage from "./pages/userScreens/admin/ManageStaff";
+import SupplierManagementPage from "./pages/userScreens/admin/ManageSupplier";
+import InventoryManagementPage from "./pages/userScreens/admin/ManageInventory";
+import AdminReportsPage from "./pages/userScreens/admin/AdminReports";
 
 /**
  * ProtectedRoute Component
- * Wraps protected pages with the Layout and passes the user data
  */
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const userJson = localStorage.getItem("user");
   const user = userJson ? JSON.parse(userJson) : null;
 
-  // 1. If no user, redirect to login
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
   const userRole = user.role?.roleName?.toLowerCase();
 
-  // 2. If role doesn't match, redirect to a safe page (avoiding a loop back to itself)
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     return <Navigate to="/login" replace />;
   }
 
-  // 3. Return the Layout. Do NOT put any setStates or logic here.
-  return <Layout user={user}>{children}</Layout>;
+  return <Layout>{children}</Layout>;
 };
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* The root path is now your HomePage */}
-        {/* The Root Path MUST be "/" for the Home Page to show immediately */}
-        <Route path="/" element={ <> <LandingNavbar /> <HomePage /> <Footer /> </> } />
-
         {/* Public Landing Pages with Navbar & Footer */}
+        <Route path="/" element={ <> <LandingNavbar /> <HomePage /> <Footer /> </> } />
         <Route path="/services" element={ <> <LandingNavbar /> <ServicesPage /> <Footer /> </> } />
         <Route path="/about" element={ <> <LandingNavbar /> <AboutPage /> <Footer /> </> } />
         <Route path="/contact" element={ <> <LandingNavbar /> <ContactPage /> <Footer /> </> } />
-
-        {/* ... Services & Contact ... */}
 
         {/* Public Auth Routes - No Sidebar */}
         <Route path="/login" element={<LoginPage />} />
@@ -102,39 +90,28 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Protected Dashboard Routes - Sidebar included */}
+        {/* Admin Routes */}
         <Route path="/admin-dashboard" element={ <ProtectedRoute allowedRoles={["admin"]}> <AdminDashboard /> </ProtectedRoute> } />
-
-        {/* Admin Subpages */}
-        <Route path="/admin/systemlog" element={<><AdminSidebar /><SystemLogsPage /></>} />
-        <Route path="/admin/managestaff" element={<><AdminSidebar /><UserManagementPage /></>} />
-        <Route path="/admin/managesupplier" element={<><AdminSidebar /><SupplierManagementPage /></>} />
-        <Route path="/admin/manageinventory" element={<><AdminSidebar /><InventoryManagementPage /></>} />
-        <Route path="/admin/adminreports" element={<><AdminSidebar /><AdminReportsPage /></>} />
-
-        <Route path="/receptionist-dashboard" element={ <ProtectedRoute allowedRoles={["receptionist"]}> <ReceptionistDashboard /> </ProtectedRoute> } />
-
-        <Route path="/delivery-dashboard" element={ <ProtectedRoute allowedRoles={["delivery person"]}> <DeliveryDashboard /> </ProtectedRoute> } />
-
-        {/* <Route 
-          path="/doctor-dashboard" 
-          element={
-            <ProtectedRoute allowedRoles={["doctor"]}>
-              <DoctorDashboard />
-            </ProtectedRoute>
-          } 
-        /> */}
+        <Route path="/admin/systemlog" element={ <ProtectedRoute allowedRoles={["admin"]}> <SystemLogsPage /> </ProtectedRoute> } />
+        <Route path="/admin/managestaff" element={ <ProtectedRoute allowedRoles={["admin"]}> <UserManagementPage /> </ProtectedRoute> } />
+        <Route path="/admin/managesupplier" element={ <ProtectedRoute allowedRoles={["admin"]}> <SupplierManagementPage /> </ProtectedRoute> } />
+        <Route path="/admin/manageinventory" element={ <ProtectedRoute allowedRoles={["admin"]}> <InventoryManagementPage /> </ProtectedRoute> } />
+        <Route path="/admin/adminreports" element={ <ProtectedRoute allowedRoles={["admin"]}> <AdminReportsPage /> </ProtectedRoute> } />
 
         {/* Pharmacist Routes */}
         <Route path="/pharmacist-dashboard" element={ <ProtectedRoute allowedRoles={["pharmacist"]}> <PharmacistDashboard /> </ProtectedRoute> } />
+        <Route path="/pharmacist/inventory" element={ <ProtectedRoute allowedRoles={["pharmacist"]}> <InventoryPage /> </ProtectedRoute> } />
+        <Route path="/pharmacist/alerts" element={ <ProtectedRoute allowedRoles={["pharmacist"]}> <AlertsPage /> </ProtectedRoute> } />
+        <Route path="/pharmacist/prescriptions" element={ <ProtectedRoute allowedRoles={["pharmacist"]}> <PrescriptionView /> </ProtectedRoute> } />
+        <Route path="/pharmacist/reports" element={ <ProtectedRoute allowedRoles={["pharmacist"]}> <ReportsPage /> </ProtectedRoute> } />
 
-        <Route path="/pharmacist/inventory" element={<><PharmacistSidebar /><InventoryPage /></>} />
-        <Route path="/pharmacist/alerts" element={<><PharmacistSidebar /><AlertsPage /></>} />
-        <Route path="/pharmacist/prescriptions" element={<><PharmacistSidebar /><PrescriptionView /></>} />
-        <Route path="/pharmacist/reports" element={<><PharmacistSidebar /><ReportsPage /></>} /> 
+        {/* Receptionist Routes */}
+        <Route path="/receptionist-dashboard" element={ <ProtectedRoute allowedRoles={["receptionist"]}> <ReceptionistDashboard /> </ProtectedRoute> } />
+        
+        {/* Delivery Routes */}
+        <Route path="/delivery-dashboard" element={ <ProtectedRoute allowedRoles={["delivery person"]}> <DeliveryDashboard /> </ProtectedRoute> } />
 
-        {/* Default Redirects */}
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        {/* Default Redirect */}
         <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </Router>
