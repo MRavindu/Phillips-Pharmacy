@@ -1,73 +1,75 @@
 import React from "react";
-import { FaFileMedical, FaSyringe, FaTruckMoving, FaChalkboardTeacher, FaWifi, FaGift, FaTruckLoading } from "react-icons/fa";
+import { FaFileMedical, FaSyringe, FaTruckMoving, FaChalkboardTeacher, FaWifi, FaGift } from "react-icons/fa";
+import ParticlesBackground from "../../components/ParticlesBackground";
+
 
 const ServicesPage = () => {
   const services = [
     {
       title: "Prescription Refills",
       desc: "Bring the prescription your doctor provided, and get your refills processed in minutes.",
-      icon: <FaFileMedical size={40} color="var(--tertiary-base)" />,
+      icon: <FaFileMedical size={40} className="text-amber-500" />,
     },
     {
       title: "Vaccinations",
       desc: "Schedule your flu shots or travel vaccines with our certified pharmacists.",
-      icon: <FaSyringe size={40} color="var(--tertiary-base)" />,
+      icon: <FaSyringe size={40} className="text-amber-500" />,
     },
     {
       title: "Health Consultations",
       desc: "Private one-on-one consultations to discuss your medication and wellness.",
-      icon: <FaChalkboardTeacher size={40} color="var(--tertiary-base)" />,
+      icon: <FaChalkboardTeacher size={40} className="text-amber-500" />,
     },
     {
       title: "Online Orders",
       desc: "Easily upload your prescription and get your refills processed in minutes.",
-      icon: <FaWifi size={40} color="var(--tertiary-base)" />,
+      icon: <FaWifi size={40} className="text-amber-500" />,
     },
     {
       title: "Home Delivery",
       desc: "Now we offer island-wide Free delivery for orders above Rs. 5000. Fast and secure.",
-      icon: <FaTruckMoving size={40} color="var(--tertiary-base)" />,
+      icon: <FaTruckMoving size={40} className="text-amber-500" />,
     },
     {
       title: "Loyalty Offers",
-      desc: "Become one of our loyalty customer community and get opportunity to earn promotianal and Seasonal loyalty rewards.",
-      icon: <FaGift size={40} color="var(--tertiary-base)" />,
+      desc: "Become one of our loyalty customer community and get opportunity to earn promotional and seasonal loyalty rewards.",
+      icon: <FaGift size={40} className="text-amber-500" />,
     },
   ];
 
   return (
-    <div style={{ padding: "80px 50px", background: "linear-gradient(to top, var(--primary-shade), var(--bg-light))" }}>
-      <div style={{ textAlign: "center", marginBottom: "60px" }}>
-        <h2 style={{color: "#2d3748", margin: '5% 0 0 0'}}>Our Professional <span style={{color: 'var(--primary-base)'}}>Services</span></h2>
-        <p style={{ color: "#718096", margin: '1% 0 5% 0'}}>Comprehensive healthcare solutions tailored for you.</p>
-      </div>
+    <section className="pb-20 px-[50px] bg-gray-100 relative overflow-hidden">
+      
+      <ParticlesBackground />
 
-      <div style={{ 
-        display: "grid", 
-        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", 
-        gap: "30px",
-        maxWidth: "1200px",
-        margin: "0 auto"
-      }}>
-        {services.map((service, index) => (
-          <div key={index} style={{ 
-            padding: "40px", 
-            backgroundColor: "#fff", 
-            borderRadius: "15px", 
-            textAlign: "center",
-            boxShadow: "0 10px 25px rgba(0,0,0,0.05)",
-            transition: "transform 0.3s ease"
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-10px)"}
-          onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-          >
-            <div style={{ marginBottom: "20px" }}>{service.icon}</div>
-            <h6 style={{ marginBottom: "15px", color: "var(--primary-shade)" }}>{service.title}</h6>
-            <p style={{ color: "#4a5568", lineHeight: "1.6" }}>{service.desc}</p>
-          </div>
-        ))}
+      {/* Section Header */}
+      <div className="relative z-10">
+        <div className="text-center mb-16 py-[10%] px-[5%]">
+          <h2 className="text-gray-800 text-8xl font-bold mb-3">
+            All Available <span className="text-cyan-500">Services</span>
+          </h2>
+          <h2 className="text-green-500 text-8xl font-bold mb-4">
+            Just for You!
+          </h2>
+          <p className="text-gray-500">Comprehensive healthcare solutions tailored for you.</p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[30px] max-w-[1200px] mx-auto">
+          {services.map((service, index) => (
+            <div
+              key={index}
+              className="flex flex-col p-10 bg-white rounded-[15px] text-center items-center justify-center shadow-[0_10px_25px_rgba(0,0,0,0.05)] 
+                        transition-transform duration-300 ease-in-out hover:-translate-y-2.5"
+            >
+              <div className="mb-5">{service.icon}</div>
+              <h6 className="text-cyan-800 text-xl font-bold mb-4">{service.title}</h6>
+              <p className="text-gray-600 leading-relaxed">{service.desc}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

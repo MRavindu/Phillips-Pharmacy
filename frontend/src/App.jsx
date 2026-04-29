@@ -10,7 +10,7 @@ import {
 PUBLIC PAGES
 ================================================================*/
 import LandingNavbar from "./components/navbars/LandingNavbar";
-import Footer from "./components/footers/Footer";
+import Footer from "./components/footers/LandingFooter";
 import HomePage from "./pages/landing/HomePage";
 import ServicesPage from "./pages/landing/ServicesPage";
 import AboutPage from "./pages/landing/AboutPage";
@@ -24,10 +24,10 @@ import Layout from "./components/Layout";
 /* ================================================================
 AUTH PAGES
 ================================================================*/
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import ForgotPassword from "./pages/ForgotPassword";
-import ResetPassword from "./pages/ResetPassword";
+import LoginPage from "./pages/auth/LoginPage";
+import SignupPage from "./pages/auth/SignupPage";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 /* ================================================================
 DASHBOARDS OF DIFFERENT USER ROLES
