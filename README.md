@@ -4,8 +4,6 @@
 
 ---
 
-# Phillips Pharmacy & Medicare Management System
-
 A full-stack pharmacy inventory and management system built for a modern healthcare workflow.  
 This application provides a public-facing frontend and a role-based dashboard system for managing authentication, inventory, sales, staff, prescriptions, reports, and operational tasks.
 
