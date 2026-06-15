@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/medicines")
@@ -49,6 +50,56 @@ public class MedicineController {
         LocalDate today = LocalDate.now();
         LocalDate nextMonth = today.plusDays(30);
         return medicineRepository.countByExpdateBetween(today, nextMonth);
+    }
+
+    @GetMapping("/expiring-soon")
+    public List<Medicine> getExpiringSoon() {
+        LocalDate today = LocalDate.now();
+        LocalDate nextMonth = today.plusDays(30);
+        return medicineRepository.findByExpdateBetween(today, nextMonth);
+    }
+
+    @GetMapping("/search")
+    public List<Medicine> searchMedicines(@RequestParam("query") String query) {
+        return medicineRepository.findByMedicinenameContainingIgnoreCaseOrCommercialnameContainingIgnoreCase(query, query);
+    }
+
+    @GetMapping("/filter")
+    public List<Medicine> filterMedicines(
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value = "minPrice", required = false) Float minPrice,
+            @RequestParam(value = "maxPrice", required = false) Float maxPrice,
+            @RequestParam(value = "minStock", required = false) Integer minStock) {
+        
+        if (type != null && !type.isEmpty()) {
+            return medicineRepository.findByMedicinetypeIgnoreCase(type);
+        }
+        if (minPrice != null) {
+            return medicineRepository.findByPriceGreaterThanEqual(minPrice);
+        }
+        if (maxPrice != null) {
+            return medicineRepository.findByPriceLessThanEqual(maxPrice);
+        }
+        if (minStock != null) {
+            return medicineRepository.findByQuantityGreaterThanEqual(minStock);
+        }
+        return medicineRepository.findAll();
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<?> getInventoryStats() {
+        LocalDate today = LocalDate.now();
+        LocalDate nextMonth = today.plusDays(30);
+        
+        long totalMedicines = medicineRepository.count();
+        long lowStockCount = medicineRepository.findByQuantityLessThan(10).size();
+        long expiringSoonCount = medicineRepository.countByExpdateBetween(today, nextMonth);
+        
+        return ResponseEntity.ok(Map.of(
+            "totalMedicines", totalMedicines,
+            "lowStockCount", lowStockCount,
+            "expiringSoonCount", expiringSoonCount
+        ));
     }
 
     @PutMapping("/update/{id}")

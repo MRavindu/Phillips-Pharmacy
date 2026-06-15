@@ -15,3 +15,24 @@ export const getLowStockMedicines = async () => {
   const response = await axios.get(`${API_URL}/low-stock`);
   return response.data;
 };
+
+export const getExpiringSoonMedicines = async () => {
+  const response = await axios.get(`${API_URL}/expiring-soon`);
+  return response.data;
+};
+
+export const searchMedicines = (query) =>
+  axios.get(`${API_URL}/search`, { params: { query } }).then((res) => res.data);
+
+export const filterMedicines = (filters) =>
+  axios.get(`${API_URL}/filter`, { params: filters }).then((res) => res.data);
+
+export const getInventoryStats = async () => {
+  const response = await axios.get(`${API_URL}/stats`);
+  return response.data;
+};
+
+export const getExpiryCount = async () => {
+  const response = await axios.get(`${API_URL}/expiry-count`);
+  return response.data;
+};
