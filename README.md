@@ -4,259 +4,346 @@
 
 ---
 
-### `README.md`
+# Phillips Pharmacy & Medicare Management System
 
-A full-stack Pharmacy Management System (PMS) designed for a modern healthcare facility. This application features a public-facing landing page for patients and a robust, role-based dashboard for pharmacists to manage inventory, sales, and prescriptions.
+A full-stack pharmacy inventory and management system built for a modern healthcare workflow.  
+This application provides a public-facing frontend and a role-based dashboard system for managing authentication, inventory, sales, staff, prescriptions, reports, and operational tasks.
 
-## 📌 1. Project Overview
+## Overview
 
-Phillips Pharmacy & Medicare Management System is a full-stack pharmacy inventory and point-of-sale (POS) platform built with a React Typescript frontend and a Spring Boot + MySQL backend. It enables inventory tracking, sales transaction handling, prescription management, user authentication, and role-based interfaces for pharmacists, receptionists, and general users.
+Phillips Pharmacy & Medicare Management System is designed to support real-world pharmacy operations with a maintainable and scalable architecture. It combines a React-based frontend with a Spring Boot backend and MySQL database to handle:
 
-This repo is designed to support real-world pharmacy operations — from stock control to financial reporting — in a maintainable, scalable codebase optimized for future enhancements.
+- user authentication and role-based access
+- medicine inventory management
+- sales and checkout workflows
+- prescription handling
+- reporting and dashboard views
+- staff and system administration
 
-## 🚀 2. Features
-
-### 🧑‍💻 User Interfaces
-
-- Public Landing — Home, Services, About pages
-- Authentication — Signup/Login with form validation
-- Role-Based Dashboards
-- Pharmacist — Inventory controls, low stock alerts, reports
-- Receptionist — Prescription management, customer lookup
-- Admin — User & system configuration
-
-### 📦 Inventory & Sales
-
-- Track real-time stock levels
-- Add, edit, delete medicine entries
-- Point-of-Sale module with cart functionality
-- Automated alerts for low stock / expired drugs
-
-### 📊 Reporting
-
-- Revenue tracking over time
-- Exportable financial summaries
-- Custom filters for date ranges
-
-### 🗄️ Backend Logic
-
-- RESTful API using Spring Boot
-- Database model with medicine, sale, user, and invoice tables
-- Authentication middleware + role access control
-- Hibernate ORM via Spring Data JPA
-
-## 🛠️ 3. Tech Stack
-
-| Layer      | Technology                                       |
-| ---------- | ------------------------------------------------ |
-| Frontend   | React + TypeScript, Vite, Axios                  |
-| Backend    | Spring Boot, Java 17, Spring Data JPA, Hibernate |
-| Database   | MySQL 8+                                         |
-| Tools      | GitHub, Maven, NPM, VS Code / IntelliJ           |
-| Deployment | TBD (Docker / Cloud Options)                     |
+The project is structured as a full-stack application with a clear separation between frontend presentation, backend business logic, and data persistence.
 
 ---
 
-## 📂 4. Code Structure
+## Tech Stack
 
-### **🌐 Frontend (React)**
+### Frontend
+- **React**
+- **React Router DOM**
+- **Vite**
+- **JavaScript**
+- **Tailwind CSS**
+- **Axios**
+- **react-icons**
+- **react-particles / tsparticles**
+
+### Backend
+- **Spring Boot**
+- **Java 21**
+- **Spring Security**
+- **Spring Data JPA**
+- **Hibernate**
+- **Spring Boot Mail Starter**
+
+### Database
+- **MySQL**
+
+### Tooling
+- **Maven**
+- **npm**
+- **ESLint**
+- **Vite**
+- **GitHub**
+
+---
+
+## Features
+
+### Public Website
+- Home page
+- Services page
+- About page
+- Contact page
+
+### Authentication
+- Login
+- Signup
+- Forgot password
+- Reset password
+- Local storage session persistence
+
+### Role-Based Access
+- Admin dashboard
+- Pharmacist dashboard
+- Receptionist dashboard
+- Delivery dashboard
+
+### Pharmacy Operations
+- Medicine inventory management
+- Add, edit, and delete medicine records
+- Low-stock monitoring
+- Expiry-related tracking
+- Prescription viewing
+- Checkout and sales processing
+
+### Administration
+- Staff/user management
+- Supplier management
+- Inventory management
+- System logs
+- Reports
+
+### Reporting
+- Sales reports
+- Admin reports
+- Operational summaries
+
+---
+
+## Architecture
+
+The application follows a classic full-stack layered architecture.
+
+### Frontend Layer
+The frontend is a React single-page application built with Vite. It is responsible for:
+- rendering public pages
+- handling authentication screens
+- displaying role-specific dashboards
+- managing protected routes
+- calling backend APIs
+
+### Backend Layer
+The backend is a Spring Boot REST API that handles:
+- authentication
+- authorization
+- medicine and sales operations
+- report generation
+- email-related functionality
+- database interactions
+
+### Data Layer
+The backend uses Spring Data JPA and Hibernate to map business entities such as:
+- staff
+- roles
+- medicines
+- sales
+- sale items
+
+### Access Control
+Authentication is implemented through a protected route pattern on the frontend and Spring Security on the backend.  
+Users are redirected based on their assigned role.
+
+---
+
+## Codebase Structure
+
+The repository is organized into two main applications:
 
 ```text
-frontend
-├── public/
-│    ├── images/
-└── src/
-    ├── api/
-    │    ├── authService.js/
-    ├── components/
-    │       ├── landing/         # Navbar, Footer, Hero sections
-    │       │    ├── Footer.jsx
-    │       │    └── LandingNavbar.jsx
-    │       ├──  layout/           # Sidebar, PharmacistSidebar, Layout wrappers
-    │       │    └── PharmacistSidebar.jsx
-    │       ├── Layout.jsx
-    │       └── Sidebar.jsx
-    ├── pages/
-    │       ├── auth/             # Login.jsx, SignUp.jsx
-    │       ├── landing/
-    │       │     ├── AboutPage.jsx
-    │       │     ├── ContactPage.jsx
-    │       │     ├── HomePage.jsx
-    │       │     └── ServicesPage.jsx
-    │       ├──  pharmacist/
-    │       │     ├── AlertsPage.jsx
-    │       │     ├── InventoryPage.jsx
-    │       │     ├── PrescriptionView.jsx
-    │       │     └── ReportsPage.jsx
-    │       ├── AdminDashboard.jsx
-    │       ├── DeliveryDashboard.jsx
-    │       ├── ForgotPassword.jsx
-    │       ├── LoginPage.jsx
-    │       ├── PharmacistDashboard.jsx
-    │       ├── ReceptionistDashboard.jsx
-    │       ├── ResetPassword.jsx
-    │       └── SigunupPage.jsx
-    ├── services/
-    │       └── medicineService.js
-    ├── styles/               # global.css, index.css
-    │       └── global.css
-    ├── App.jsx               # Routing and Protected Routes
-    ├── index.css
-    └── main.jsx              # Entry point & Provider setup
-
+Phillips-Pharmacy/
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── styles/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── public/
+│   ├── index.html
+│   ├── vite.config.js
+│   └── package.json
+├── backend/
+│   ├── src/main/java/
+│   ├── src/main/resources/
+│   └── pom.xml
+├── ARCHITECTURE.md
+└── README.md
 ```
 
-### **🛡️ Backend (Spring Boot)**
+---
 
-```text
-src/main/java/com/phillipspharmacy/medicare/
-├── config/
-│      └──SecurityConfig.java
-├── controller/
-│      ├── AuthController.java
-│      ├── MedicineController.java
-│      └── PharmacistReportController.java
-├── model/
-│      ├── Medicine.java
-│      ├── OrderItem.java
-│      ├── Role.java
-│      ├── Sale.java
-│      ├── SaleItem.java
-│      └── Staff.java
-├── repository/
-│      ├── MedicineRepository.java
-│      ├── RoleRepository.java
-│      ├── SaleRepository.java
-│      └── StaffRepository.java
-├── service/
-│      └──EmailService.java
-├── PhillipsPharmacySystemApplication.java
-├── src/main/resources/     — Config files (application.properties)
-└── pom.xml
+## Frontend Structure
 
-```
+### Main files
+- `frontend/src/main.jsx` — React entry point
+- `frontend/src/App.jsx` — routing and protected route handling
+- `frontend/src/api/authService.js` — authentication API helper
 
-## 🛠️ 5. How to Get the Site Up
+### Key folders
+- `components/` — shared UI components, layouts, navbars, footers, sidebar components
+- `pages/` — public pages, auth pages, dashboards, and role-based feature pages
+- `styles/` — global styles and Tailwind-related styling
+- `api/` — API services
 
-### **Prerequisites**
+### Routing
+The frontend uses `react-router-dom` with route-based access control.  
+Public routes are available without login, while dashboard routes are protected.
 
-- Node.js ≥ 18
-- Java JDK ≥ 21
-- MySQL Server
-- Git
+---
 
-### **Step 1: Database Setup**
+## Backend Structure
 
-1. Open MySQL Workbench.
-2. Run: `CREATE DATABASE phillips_hospital_inventory_db;`
+The backend is a Spring Boot REST API organized into layers such as:
 
-### **Step 2: Backend Setup**
+- **controller** — API endpoints
+- **service** — business logic
+- **repository** — database access
+- **model/entity** — domain objects
+- **config** — security and app configuration
 
-1. Navigate to the backend folder.
-2. Update `src/main/resources/application.properties` with your MySQL username and password.
-3. Run the application using your IDE or:
+### Main backend modules
+- authentication controller
+- medicine controller
+- pharmacist report controller
+- security configuration
+- email service
+- JPA entity models
+- repository interfaces
 
-```bash
-mvn clean install
-mvn spring-boot:run
-mvnw clean spring-boot:run
+---
 
-```
+## Main User Flows
 
-### **Step 3: Frontend Setup**
+### 1. Authentication Flow
+1. User opens the login page
+2. Credentials are submitted to the backend
+3. Backend validates the user and role
+4. User data is stored in local storage
+5. User is redirected to the appropriate dashboard
 
-1. Navigate to the frontend folder.
+### 2. Inventory Flow
+1. Pharmacist opens the inventory screen
+2. Current stock is loaded from the backend
+3. User can add, edit, or delete medicines
+4. Low-stock and expiry indicators help manage stock levels
 
+### 3. Sales / Checkout Flow
+1. Medicines are selected for sale
+2. Items are processed through checkout
+3. Backend records the sale and updates stock quantities
+4. Sale records are stored for reporting and auditing
+
+### 4. Reporting Flow
+1. Authorized users open the reports section
+2. Reports are generated from persisted sales/inventory data
+3. Information is displayed for decision-making
+
+---
+
+## API and Data Handling
+
+The frontend communicates with the backend using Axios.
+
+### Authentication service
+`frontend/src/api/authService.js` handles:
+- login requests
+- signup requests
+- logout
+- current user retrieval
+
+### Backend communication
+The backend is expected to expose REST endpoints for:
+- authentication
+- inventory operations
+- prescription workflows
+- sales and checkout
+- reports
+
+---
+
+## Styling Approach
+
+The UI uses:
+- **Tailwind CSS** for utility-based styling
+- **global CSS variables** for theme consistency
+- custom visual styling for layout, typography, and color tokens
+
+The design uses a clean healthcare-oriented palette with:
+- cyan / teal primary tones
+- green for success and health-related UI
+- amber accents for emphasis
+
+---
+
+## Deployment and Run Instructions
+
+### Prerequisites
+- Node.js
+- npm
+- Java 21
+- Maven
+- MySQL
+
+### Frontend setup
 ```bash
 cd frontend
-
-```
-
-2. Install dependencies:
-
-```bash
 npm install
-
-```
-
-3. Start the development server:
-
-```bash
 npm run dev
-
 ```
 
-4. Access the site at `http://localhost:5173`.
+### Backend setup
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+### Access
+- Frontend: `http://localhost:5173`
+- Backend: typically `http://localhost:8080`
 
 ---
 
-## 📊 6. Database Structure
+## Configuration Notes
 
-### **Table: `medicines**`
+### Authentication
+User session data is stored in browser local storage under the key:
+- `user`
 
-| Column           | Type      | Description                             |
-| ---------------- | --------- | --------------------------------------- |
-| `id`             | Long (PK) | Unique identifier for each medicine     |
-| `brand`          | String    | Brand or manufacturer name              |
-| `category`       | String    | Medicine category (e.g., Antibiotic)    |
-| `description`    | String    | Description or usage details            |
-| `expiry_date`    | DateTime  | Date the medicine expires               |
-| `name`           | String    | Generic or display name of the medicine |
-| `stock_quantity` | Integer   | Current units available in stock        |
-| `unit_price`     | Double    | Selling price per unit                  |
+### API base URL
+The frontend auth service currently points to:
+- `http://localhost:8080/api/auth`
 
-### **Table: `sales**`
+If your backend runs on a different host or port, update the API URL accordingly.
 
-| Column           | Type      | Description                             |
-| ---------------- | --------- | --------------------------------------- |
-| `id`             | Long (PK) | Unique receipt / transaction ID         |
-| `payment_method` | String    | Payment type (Cash, Card, Online, etc.) |
-| `sale_date`      | DateTime  | Date and time of the transaction        |
-| `total_amount`   | Double    | Total value of the sale                 |
-
-### **Table: `sale_item**`
-
-| Column          | Type      | Description                               |
-| --------------- | --------- | ----------------------------------------- |
-| `id`            | Long (PK) | Unique sale item identifier               |
-| `medicine_name` | String    | Name of the medicine sold                 |
-| `price_at_sale` | Double    | Unit price at the time of sale            |
-| `quantity`      | Integer   | Number of units sold                      |
-| `sale_id`       | Long (FK) | Reference to the related sale transaction |
-
-### **Table: `staff**`
-
-| Column         | Type      | Description                                |
-| -------------- | --------- | ------------------------------------------ |
-| `staffid`      | Long (PK) | Unique staff identifier                    |
-| `snic`         | String    | National Identity Card (NIC) number        |
-| `sname`        | String    | Full name of the staff member              |
-| `semail`       | String    | Staff email address                        |
-| `stelno`       | String    | Staff contact number                       |
-| `uname`        | String    | Username for system login                  |
-| `upswrd`       | String    | Encrypted password BCrypt                  |
-| `role_id`      | Integer   | Role identifier (FK to roles table)        |
-| `is_deleted`   | Integer   | Soft delete flag (0 = Active, 1 = Deleted) |
-| `reset_token`  | String    | Password reset token                       |
-| `token_expiry` | DateTime  | Expiration time of reset token             |
-
-### **Table: `roles**`
-
-| Column      | Type    | Description                            |
-| ----------- | ------- | -------------------------------------- |
-| `role_id`   | Integer | Unique role identifier                 |
-| `role_name` | String  | Role name (Admin, Pharmacist, Cashier) |
+### Security
+The project uses Spring Security and role-based route protection.  
+Access to dashboard pages is restricted based on user role.
 
 ---
 
-## 🧪 7. API Endpoints
+## Useful Files
 
-| Method | Endpoint             | Description            |
-| ------ | -------------------- | ---------------------- |
-| GET    | `/api/medicines`     | List all medicines     |
-| POST   | `/api/medicines`     | Add new medicine       |
-| PUT    | `/api/medicines/:id` | Update stock           |
-| DELETE | `/api/medicines/:id` | Remove item            |
-| GET    | `/api/reports`       | Generate sales reports |
+### Frontend
+- `frontend/src/App.jsx`
+- `frontend/src/main.jsx`
+- `frontend/src/api/authService.js`
+- `frontend/src/styles/global.css`
+- `frontend/vite.config.js`
+- `frontend/index.html`
+
+### Backend
+- `backend/pom.xml`
+- `backend/src/main/resources/application.properties`
+- Spring Boot controller, service, repository, and model classes
+
+### Documentation
+- `ARCHITECTURE.md`
 
 ---
+
+## Target Audience
+
+This project is useful for:
+- pharmacy staff
+- pharmacists
+- receptionists
+- administrators
+- developers reviewing the system architecture
+- recruiters and collaborators evaluating the project
+
+---
+
+## License
+
+No license has been specified for this repository.
